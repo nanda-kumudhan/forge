@@ -8,7 +8,7 @@
   ############################################################
   # Boot
   ############################################################
-  system.stateVersion = "26.05";
+  system.stateVersion = "unstable";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
