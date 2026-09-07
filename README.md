@@ -1,400 +1,423 @@
-forge — Deployable NixOS Workstation
+# forge — Deployable NixOS Workstation
 
-A deployable NixOS 26.05 workstation configuration intended for quickly turning a compatible machine into a fully equipped development computer.
+ A deployable **NixOS 26.05** workstation configuration intended for quickly turning a compatible machine into a fully equipped development computer.
 
-The goal is simplicity: no flakes, no Secure Boot configuration, and no unnecessary infrastructure. The system provides a ready-to-use development environment with Sway, networking, VPN support, virtualization, containers, and common desktop applications.
+ The goal is simplicity: **no flakes, no Secure Boot configuration, and no unnecessary infrastructure**. The system provides a ready-to-use development environment with Sway, networking, VPN support, virtualization, containers, and common desktop applications.
 
-The configuration is primarily designed around an AMD TRIGKEY S5, but most of the software configuration is suitable for other x86_64 machines.
+ ## Philosophy
 
-Philosophy
+ This configuration is designed for situations where I need a computer and want to get productive quickly.
 
-This configuration is designed for situations where I need a computer and want to get productive quickly.
+ Instead of manually installing and configuring:
 
-Instead of manually installing and configuring:
+ - Development tools
+- Editors
+- Compilers
+- Programming languages
+- Virtual machines
+- Containers
+- VPN clients
+- Desktop applications
+- Audio/Bluetooth support
+- Sway and Wayland utilities
 
-Development tools
-Editors
-Compilers
-Programming languages
-Virtual machines
-Containers
-VPN clients
-Desktop applications
-Audio/Bluetooth support
-Sway and Wayland utilities
+ they are all defined declaratively in one NixOS configuration.
 
-they are all defined declaratively in one NixOS configuration.
+ The system favors:
 
-The system favors:
+ - **NixOS stable** over Unstable
+- **Latest available kernel** for newer hardware support
+- **Sway/Wayland** as the primary desktop
+- **Simple channel-based management** instead of flakes
+- **Reproducible system configuration**
+- **Useful development tooling out of the box**
+- **Minimal boot/security complexity for now**
 
-NixOS stable over Unstable
-Latest available kernel for newer hardware support
-Sway/Wayland as the primary desktop
-Simple channel-based management instead of flakes
-Reproducible system configuration
-Useful development tooling out of the box
-Minimal boot/security complexity for now
-System
-Component	Configuration
-OS	NixOS 26.05
-Architecture	x86_64
-Target hardware	AMD TRIGKEY S5
-Kernel	linuxPackages_latest
-Bootloader	systemd-boot
-Secure Boot	Not configured
-Desktop	Sway
-Guest desktop	KDE Plasma 6
-Display manager	SDDM
-Display protocol	Wayland
-Networking	NetworkManager
-Firewall	Enabled
-VPN	OpenVPN + WireGuard
-Audio	PipeWire
-Containers	Podman + Docker
-Virtual machines	KVM/libvirt
-Android	Waydroid
-Security	TPM2 + AppArmor + firewall
-Nix flakes	Not used
-Desktop
-Sway
+ ## System
 
-Sway is the primary desktop environment.
+ | Component | Configuration |
+| --- | --- |
+| OS | NixOS 26.05 |
+| Architecture | x86\_64 |
+| Target hardware | AMD TRIGKEY S5 |
+| Kernel | `linuxPackages_latest` |
+| Bootloader | systemd-boot |
+| Secure Boot | Not configured |
+| Desktop | Sway |
+| Guest desktop | KDE Plasma 6 |
+| Display manager | SDDM |
+| Display protocol | Wayland |
+| Networking | NetworkManager |
+| Firewall | Enabled |
+| VPN | OpenVPN + WireGuard |
+| Audio | PipeWire |
+| Containers | Podman + Docker |
+| Virtual machines | KVM/libvirt |
+| Android | Waydroid |
+| Security | TPM2 + AppArmor + firewall |
+| Nix flakes | Not used |
 
-The configuration includes a collection of Wayland tools and utilities:
+ ## Desktop
 
-Waybar
-Foot
-Rofi
-Dunst
-Grim
-Slurp
-Swaylock
-Swayidle
-Swaybg
-Kanshi
-Wdisplays
-wl-clipboard
-NetworkManager applet
-Blueman
-Pavucontrol
-Thunar
-Zathura
-MPV
-Playerctl
+ ### Sway
 
-The goal is to have a usable Sway environment immediately after deployment without manually assembling the basic Wayland ecosystem.
+ Sway is the primary desktop environment.
 
-KDE Plasma
+ The configuration includes a collection of Wayland tools and utilities:
 
-KDE Plasma 6 is also installed.
+ - Waybar
+- Foot
+- Rofi
+- Dunst
+- Grim
+- Slurp
+- Swaylock
+- Swayidle
+- Swaybg
+- Kanshi
+- Wdisplays
+- wl-clipboard
+- NetworkManager applet
+- Blueman
+- Pavucontrol
+- Thunar
+- Zathura
+- MPV
+- Playerctl
 
-It is primarily intended as a convenient desktop session for the guest account, while Sway is the preferred environment for the primary user.
+ The goal is to have a usable Sway environment immediately after deployment without manually assembling the basic Wayland ecosystem.
 
-SDDM provides the graphical login screen and session selection.
+ ### KDE Plasma
 
-Development environment
+ KDE Plasma 6 is also installed.
 
-The system is intended to be ready for general software development immediately after installation.
+ It is primarily intended as a convenient desktop session for the `guest` account, while Sway is the preferred environment for the primary user.
 
-Languages and toolchains
+ SDDM provides the graphical login screen and session selection.
 
-Included development environments include:
+ ## Development environment
 
-C
-C++
-Rust
-Go
-Ruby
-Java
-Python
-JavaScript/Node.js
+ The system is intended to be ready for general software development immediately after installation.
 
-Also included:
+ ### Languages and toolchains
 
-GCC
-Clang
-GDB
-LLDB
-Cargo
-Maven
-Gradle
-JDK
-Python virtual environments
-pip
-IPython
-Jupyter
-Editors
+ Included development environments include:
 
-Installed editors include:
+ - C
+- C++
+- Rust
+- Go
+- Ruby
+- Java
+- Python
+- JavaScript/Node.js
 
-Neovim
-Vim
-Zed
+ Also included:
 
-Git and common command-line utilities are also included.
+ - GCC
+- Clang
+- GDB
+- LLDB
+- Cargo
+- Maven
+- Gradle
+- JDK
+- Python virtual environments
+- pip
+- IPython
+- Jupyter
 
-Database development
+ ### Editors
 
-DBeaver is included for working with databases.
+ Installed editors include:
 
-Virtualization
+ - Neovim
+- Vim
+- Zed
 
-The workstation includes both containers and full virtual machines.
+ Git and common command-line utilities are also included.
 
-Podman
+ ### Database development
 
-Podman is enabled with Docker compatibility:
+ DBeaver is included for working with databases.
 
+ ## Virtualization
+
+ The workstation includes both containers and full virtual machines.
+
+ ### Podman
+
+ Podman is enabled with Docker compatibility:
+
+```
 virtualisation.podman = {
   enable = true;
   dockerCompat = true;
 };
+```
 
+ Podman Desktop is also installed.
 
-Podman Desktop is also installed.
+ ### Docker
 
-Docker
+ Docker is enabled for compatibility with software that expects Docker.
 
-Docker is enabled for compatibility with software that expects Docker.
+ The primary user is a member of the `docker` group.
 
-The primary user is a member of the docker group.
+ > Membership of the Docker group provides effectively root-equivalent access to the system. Only trusted users should belong to it.
 
-Membership of the Docker group provides effectively root-equivalent access to the system. Only trusted users should belong to it.
+ ### KVM / libvirt
 
-KVM / libvirt
+ KVM/libvirt and virt-manager are enabled for running virtual machines.
 
-KVM/libvirt and virt-manager are enabled for running virtual machines.
+ SPICE USB redirection is also enabled.
 
-SPICE USB redirection is also enabled.
+ ### Waydroid
 
-Waydroid
+ Waydroid is enabled for running Android applications on the Linux desktop.
 
-Waydroid is enabled for running Android applications on the Linux desktop.
+ ## Networking
 
-Networking
+ NetworkManager manages the system's network connections.
 
-NetworkManager manages the system's network connections.
+ The firewall is enabled:
 
-The firewall is enabled:
-
+```
 networking.firewall.enable = true;
+```
 
+ Port `53317` is currently allowed for both TCP and UDP.
 
-Port 53317 is currently allowed for both TCP and UDP.
+ If the port is not required by a deployed application, it should be removed from the firewall configuration.
 
-If the port is not required by a deployed application, it should be removed from the firewall configuration.
+ ## VPN
 
-VPN
+ The system supports common VPN configurations.
 
-The system supports common VPN configurations.
+ ### OpenVPN
 
-OpenVPN
+ OpenVPN and NetworkManager integration are installed:
 
-OpenVPN and NetworkManager integration are installed:
-
+```
 networking.networkmanager = {
   enable = true;
   plugins = with pkgs; [
     networkmanager-openvpn
   ];
 };
+```
 
+ The OpenVPN client is also installed.
 
-The OpenVPN client is also installed.
+ An `.ovpn` configuration can be imported with:
 
-An .ovpn configuration can be imported with:
-
+```
 nmcli connection import type openvpn file your-vpn.ovpn
+```
 
-WireGuard
+ ### WireGuard
 
-WireGuard tools are installed:
+ WireGuard tools are installed:
 
+```
 wireguard-tools
+```
 
+ NetworkManager provides native WireGuard connection support.
 
-NetworkManager provides native WireGuard connection support.
+ A WireGuard configuration can be imported with:
 
-A WireGuard configuration can be imported with:
-
+```
 nmcli connection import type wireguard file your-vpn.conf
+```
 
-Security
+ ## Security
 
-The system currently uses several basic security layers:
+ The system currently uses several basic security layers:
 
-Firewall
-AppArmor
-Polkit
-TPM 2.0 support
-CPU microcode updates
-GNOME Keyring
-Normal NixOS privilege separation
-Secure Boot
+ - Firewall
+- AppArmor
+- Polkit
+- TPM 2.0 support
+- CPU microcode updates
+- GNOME Keyring
+- Normal NixOS privilege separation
 
-Secure Boot is not currently configured.
+ ### Secure Boot
 
-The system currently uses standard systemd-boot:
+ **Secure Boot is not currently configured.**
 
+ The system currently uses standard `systemd-boot`:
+
+```
 boot.loader.systemd-boot.enable = true;
+```
 
+ Lanzaboote and `sbctl` are intentionally not part of the current deployment.
 
-Lanzaboote and sbctl are intentionally not part of the current deployment.
+ Secure Boot may be added later.
 
-Secure Boot may be added later.
+ ### TPM
 
-TPM
+ TPM 2.0 support is enabled:
 
-TPM 2.0 support is enabled:
-
+```
 security.tpm2 = {
   enable = true;
   pkcs11.enable = true;
   tctiEnvironment.enable = true;
 };
+```
 
+ Enabling TPM support does **not** automatically mean that the disk is encrypted or that the TPM is being used for disk unlocking.
 
-Enabling TPM support does not automatically mean that the disk is encrypted or that the TPM is being used for disk unlocking.
+ ### Disk encryption
 
-Disk encryption
+ Disk encryption is installation/storage dependent and is not defined by the main configuration shown here.
 
-Disk encryption is installation/storage dependent and is not defined by the main configuration shown here.
+ For machines that may be physically accessible to other people, LUKS2 disk encryption is recommended.
 
-For machines that may be physically accessible to other people, LUKS2 disk encryption is recommended.
+ Bluetooth, fingerprint readers, scanners, and other common workstation hardware are also supported where available.
 
-Hardware
+ ## Audio
 
-The primary target is an AMD-based TRIGKEY S5.
+ PipeWire provides the audio stack:
 
-AMD CPU microcode updates are enabled:
-
-hardware.cpu.amd.updateMicrocode = true;
-
-
-Graphics support uses the normal Linux/Mesa stack rather than Intel-specific drivers.
-
-Bluetooth, fingerprint readers, scanners, and other common workstation hardware are also supported where available.
-
-Audio
-
-PipeWire provides the audio stack:
-
+```
 services.pipewire = {
   enable = true;
   alsa.enable = true;
   pulse.enable = true;
   jack.enable = true;
 };
+```
 
+ This provides compatibility with modern desktop applications while supporting ALSA, PulseAudio applications, and JACK workloads.
 
-This provides compatibility with modern desktop applications while supporting ALSA, PulseAudio applications, and JACK workloads.
+ ## Power management
 
-Power management
+ The system uses `power-profiles-daemon`.
 
-The system uses power-profiles-daemon.
+ It is configured to suspend after 15 minutes of inactivity:
 
-It is configured to suspend after 15 minutes of inactivity:
-
+```
 services.logind.settings.Login = {
   HandlePowerKey = "suspend";
   IdleAction = "suspend";
   IdleActionSec = "15min";
 };
+```
 
+ SSD TRIM is enabled:
 
-SSD TRIM is enabled:
-
+```
 services.fstrim.enable = true;
+```
 
+ ZRAM is enabled at 50% of system memory:
 
-ZRAM is enabled at 50% of system memory:
-
+```
 zramSwap = {
   enable = true;
   memoryPercent = 50;
 };
+```
 
-Storage and Nix maintenance
+ ## Storage and Nix maintenance
 
-Automatic Nix store optimization is enabled:
+ Automatic Nix store optimization is enabled:
 
+```
 nix.settings.auto-optimise-store = true;
 nix.optimise.automatic = true;
+```
 
+ Automatic garbage collection is intentionally disabled.
 
-Automatic garbage collection is intentionally disabled.
+ Garbage collection can be performed manually:
 
-Garbage collection can be performed manually:
-
+```
 sudo nix-collect-garbage -d
+```
 
+ This is intentional for a deployable system where I may want to keep older generations around for rollback.
 
-This is intentional for a deployable system where I may want to keep older generations around for rollback.
+ ## Deployment
 
-Deployment
+ This configuration deliberately does **not use flakes**.
 
-This configuration deliberately does not use flakes.
+ That keeps deployment straightforward and avoids introducing a `flake.nix`/`flake.lock` workflow when a normal NixOS configuration is sufficient.
 
-That keeps deployment straightforward and avoids introducing a flake.nix/flake.lock workflow when a normal NixOS configuration is sufficient.
+ ### Test a configuration
 
-Test a configuration
+ Before switching permanently:
 
-Before switching permanently:
-
+```
 sudo nixos-rebuild test
+```
 
-Apply configuration
+ ### Apply configuration
 
-For a channel-based installation:
+ For a channel-based installation:
 
+```
 sudo nixos-rebuild switch --upgrade
+```
 
+ This updates the configured NixOS channel and switches to the new system configuration.
 
-This updates the configured NixOS channel and switches to the new system configuration.
+ If the channel has already been updated:
 
-If the channel has already been updated:
-
+```
 sudo nixos-rebuild switch
+```
 
-Rollbacks
+ ## Rollbacks
 
-NixOS creates system generations when configurations are rebuilt.
+ NixOS creates system generations when configurations are rebuilt.
 
-If a new deployment doesn't work correctly, reboot and select an older generation from systemd-boot.
+ If a new deployment doesn't work correctly, reboot and select an older generation from `systemd-boot`.
 
-Installed generations can be inspected with:
+ Installed generations can be inspected with:
 
+```
 sudo nix-env --list-generations \
   --profile /nix/var/nix/profiles/system
+```
 
+ This makes the machine relatively easy to recover after a bad configuration or package update.
 
-This makes the machine relatively easy to recover after a bad configuration or package update.
+ ## Kernel
 
-Kernel
+ The system intentionally uses:
 
-The system intentionally uses:
-
+```
 boot.kernelPackages = pkgs.linuxPackages_latest;
+```
 
+ This means the system uses the latest kernel package provided by the selected `nixpkgs` release.
 
-This means the system uses the latest kernel package provided by the selected nixpkgs release.
+ The operating system remains based on **NixOS 26.05 stable**; selecting `linuxPackages_latest` does not turn the system into NixOS Unstable.
 
-The operating system remains based on NixOS 26.05 stable; selecting linuxPackages_latest does not turn the system into NixOS Unstable.
+ Check the currently running kernel:
 
-Check the currently running kernel:
-
+```
 uname -r
+```
 
-Users
-Primary user
+ ## Users
 
-The primary account is:
+ ### Primary user
 
+ The primary account is:
+
+```
 nanda-kumudhan
+```
 
+ It has administrative and development-related group membership, including:
 
-It has administrative and development-related group membership, including:
-
+```
 networkmanager
 wheel
 libvirtd
@@ -403,80 +426,85 @@ dialout
 adbusers
 input
 docker
+```
 
-Guest user
+ ### Guest user
 
-A separate guest account is provided for non-administrative use.
+ A separate `guest` account is provided for non-administrative use.
 
-The guest account only belongs to:
+ The guest account only belongs to:
 
+```
 networkmanager
+```
 
+ It does not have administrative, Docker, KVM, or libvirt privileges.
 
-It does not have administrative, Docker, KVM, or libvirt privileges.
+ A real password should be configured before using the account.
 
-A real password should be configured before using the account.
+ ## Desktop applications
 
-Desktop applications
+ The system includes a broad collection of applications suitable for a general-purpose development workstation.
 
-The system includes a broad collection of applications suitable for a general-purpose development workstation.
+ Notable applications include:
 
-Notable applications include:
+ - Firefox
+- Brave
+- Anki
+- LibreOffice
+- KeepassXC
+- DBeaver
+- Remmina
+- Spotify
+- Zed
+- Neovim
+- Git
+- Jupyter
+- Texmaker
+- Texstudio
+- virt-manager
+- Podman Desktop
+- QEMU
+- rpi-imager
+- Seahorse
+- GNOME Disk Utility
 
-Firefox
-Brave
-Anki
-LibreOffice
-KeepassXC
-DBeaver
-Remmina
-Spotify
-Zed
-Neovim
-Git
-Jupyter
-Texmaker
-Texstudio
-virt-manager
-Podman Desktop
-QEMU
-rpi-imager
-Seahorse
-GNOME Disk Utility
-Firmware
+ ## Firmware
 
-fwupd is intentionally not enabled.
+ `fwupd` is intentionally **not enabled**.
 
-Firmware/BIOS updates for the target TRIGKEY hardware are handled separately rather than through the NixOS configuration.
+ Firmware/BIOS updates for the target TRIGKEY hardware are handled separately rather than through the NixOS configuration.
 
-Current boot/security status
+ ## Current boot/security status
 
-The current deployment intentionally keeps boot configuration simple:
+ The current deployment intentionally keeps boot configuration simple:
 
+```
 UEFI
   │
   └── systemd-boot
         │
         └── NixOS
+```
 
+ There is currently:
 
-There is currently:
+ - No Secure Boot
+- No Lanzaboote
+- No `sbctl`
+- No custom Secure Boot keys
 
-No Secure Boot
-No Lanzaboote
-No sbctl
-No custom Secure Boot keys
+ These can be added later if the threat model or deployment requirements change.
 
-These can be added later if the threat model or deployment requirements change.
+ ## Why this configuration exists
 
-Why this configuration exists
+ This isn't intended to be a minimal NixOS installation.
 
-This isn't intended to be a minimal NixOS installation.
+ It is a **ready-to-deploy workstation**.
 
-It is a ready-to-deploy workstation.
+ The idea is that when I need a computer for development, I should be able to deploy this configuration and immediately have:
 
-The idea is that when I need a computer for development, I should be able to deploy this configuration and immediately have:
-
+```
 NixOS
  ├── Sway
  ├── Wayland tools
@@ -495,18 +523,19 @@ NixOS
  ├── Bluetooth
  ├── Firewall
  └── Common desktop applications
+```
 
+ The configuration favors **practicality and fast deployment** over having the smallest possible system.
 
-The configuration favors practicality and fast deployment over having the smallest possible system.
+ ## Design goals
 
-Design goals
-Deployable — usable as a general-purpose workstation configuration.
-Simple — no flakes or unnecessary infrastructure.
-Stable — based on NixOS 26.05 rather than Unstable.
-Modern — uses the latest kernel available in the selected nixpkgs.
-Developer-friendly — broad language and tooling support.
-Wayland-first — Sway is the primary desktop.
-Virtualization-ready — KVM, libvirt, Podman, Docker and Waydroid.
-Network-ready — NetworkManager, firewall, OpenVPN and WireGuard.
-Recoverable — NixOS generations provide straightforward rollback.
-Extensible — Secure Boot, additional VPNs, encryption, and other features can be added later.
+ 1. **Deployable** — usable as a general-purpose workstation configuration.
+2. **Simple** — no flakes or unnecessary infrastructure.
+3. **Stable** — based on NixOS 26.05 rather than Unstable.
+4. **Modern** — uses the latest kernel available in the selected nixpkgs.
+5. **Developer-friendly** — broad language and tooling support.
+6. **Wayland-first** — Sway is the primary desktop.
+7. **Virtualization-ready** — KVM, libvirt, Podman, Docker and Waydroid.
+8. **Network-ready** — NetworkManager, firewall, OpenVPN and WireGuard.
+9. **Recoverable** — NixOS generations provide straightforward rollback.
+10. **Extensible** — Secure Boot, additional VPNs, encryption, and other features can be added later.
