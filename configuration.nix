@@ -85,9 +85,7 @@
     ];
   };
 
-  # KDE Plasma - intended for the guest account
-  services.desktopManager.plasma6.enable = true;
-
+ 
   ############################################################
   # Desktop Portals (screen sharing, file pickers)
   ############################################################
@@ -140,6 +138,7 @@
   services.printing.enable = true;
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
+  services.fprintd.enable = true;
   services.upower.enable = true;
   services.flatpak.enable = true;
   services.logind.settings.Login = {
@@ -169,9 +168,9 @@
     anki brave gh firefox efibootmgr fprintd bluez
     cargo curl distrobox github-copilot-cli spice spice-gtk spice-protocol
     fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
-    localsend lswt nano nodejs texmaker seahorse
+    localsend lswt nano nodejs seahorse materia-theme
     papirus-icon-theme python3 qemu openvpn wireguard-tools
-    remmina rustc rpi-imager spotify tree wget zed-editor
+    remmina rustc rpi-imager tree wget zed-editor
     gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
     python3Packages.virtualenv maven gradle jdk gnome-disk-utility
 
@@ -200,16 +199,7 @@
   ############################################################
   users.users."builder" = {
     isNormalUser = true;
-    description = "Nanda Kumudhan";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "dialout" "adbusers" "input" "docker" ];
-  };
-
-  users.users."guest" = {
-    isNormalUser = true;
-    description = "Guest";
-    extraGroups = [ "networkmanager" ];
-    # set a real password/hash before first boot, e.g. via
-    # `passwd guest` after install, or users.users.guest.hashedPasswordFile
   };
 
   virtualisation.docker.enable = true;
@@ -221,7 +211,7 @@
   #
   # Swapped greetd/tuigreet (which just launched straight into
   # Sway for anyone) for SDDM, since we now need a session
-  # picker so nanda-kumudhan can choose Sway and guest can
+  # picker so nanda-kumudhan can choose Sway and uest can
   # choose Plasma at login.
   ############################################################
   services.displayManager.sddm = {
