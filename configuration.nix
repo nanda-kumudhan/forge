@@ -154,7 +154,6 @@
   ############################################################
   virtualisation.podman = {
     enable = true;
-    dockerCompat = true;
   };
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
@@ -184,7 +183,7 @@
     cups-pk-helper system-config-printer
     exfatprogs ntfsprogs btrfs-progs fuse2
     powertop smartmontools snapper
-    noto-fonts noto-fonts-emoji
+    noto-fonts noto-fonts-color-emoji
     udiskie wmenu
     texlive.combined.scheme-full texstudio
   ];
