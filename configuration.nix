@@ -190,13 +190,13 @@
     arduino-ide arduino-cli appimage-run
     # merged in from the archway pkglists (pacman + aur), minus
     # vpn / tor / games / torrent apps, discord, and sbctl
-    clang go ruby vim neovim lldb
+    clang go ruby vim neovim lldb transmission_4
     dbeaver-bin podman-desktop cmake
     cups-pk-helper system-config-printer
     exfatprogs ntfsprogs btrfs-progs fuse2
-    powertop smartmontools snapper
-    noto-fonts noto-fonts-color-emoji
-    udiskie wmenu
+    powertop smartmontools snapper proton-vpn-cli
+    noto-fonts noto-fonts-color-emoji torsocks
+    udiskie wmenu tor tor-browser prismlauncher
     texlive.combined.scheme-full texstudio
   ];
 
