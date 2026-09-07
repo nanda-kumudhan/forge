@@ -92,9 +92,24 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [
+    wlr.settings.screencast = {
+        output_name = "eDP-1";
+        chooser_type = "dmenu";
+        chooser_cmd = "${pkgs.rofi}/bin/rofi -dmenu -p 'Select Output:'";
+      };	    
+  extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
+  config = {
+    common = {
+      default = [ "wlr" "gtk" ];
+    };
+    sway = {
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+      "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    };
+   };
   };
 
   ############################################################
@@ -170,7 +185,7 @@
     fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
     localsend lswt nano nodejs seahorse materia-theme
     papirus-icon-theme python3 qemu openvpn wireguard-tools
-    remmina rustc rpi-imager tree wget zed-editor
+    remmina rustc rpi-imager spotify tree wget zed-editor
     gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
     python3Packages.virtualenv maven gradle jdk gnome-disk-utility
 
@@ -214,10 +229,6 @@
   # picker so nanda-kumudhan can choose Sway and uest can
   # choose Plasma at login.
   ############################################################
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
 
   ############################################################
   # Laptop Power Management
@@ -225,9 +236,10 @@
   services.power-profiles-daemon.enable = true;
 
   services.fstrim.enable = true;
-  security.pam.services.sddm.enableGnomeKeyring = true;
+  security.pam.services.ly.enableGnomeKeyring = true;
   services.gnome.gnome-keyring.enable = true;
-
+  services.displayManager.ly.enable = true;
+  
   # nix.gc block removed - no automatic garbage collection
 
   nix.settings.auto-optimise-store = true;
