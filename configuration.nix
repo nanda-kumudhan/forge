@@ -184,10 +184,10 @@
     fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
     localsend lswt nano nodejs seahorse materia-theme
     papirus-icon-theme python3 qemu openvpn wireguard-tools
-    remmina rustc rpi-imager spotify tree wget zed-editor
+    remmina rustc rpi-imager tree wget zed-editor
     gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
     python3Packages.virtualenv maven gradle jdk gnome-disk-utility
-
+    arduino-ide arduino-cli appimage-run
     # merged in from the archway pkglists (pacman + aur), minus
     # vpn / tor / games / torrent apps, discord, and sbctl
     clang go ruby vim neovim lldb
