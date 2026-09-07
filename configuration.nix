@@ -14,15 +14,22 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "msr" "uinput" ];
 
-  ############################################################
+ ############################################################
   # Networking
   ############################################################
   networking.hostName = "forge";
-  networking.networkmanager.enable = true;
-  # VPN plugins removed (openconnect / openvpn / vpnc)
+  
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
+  
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
+
   # tailscale removed
 
   ############################################################
@@ -168,7 +175,7 @@
     cargo curl distrobox github-copilot-cli spice spice-gtk spice-protocol
     fastfetch gcc g++ git gdb jq jupyter keepassxc libreoffice-fresh
     localsend lswt nano nodejs texmaker seahorse
-    papirus-icon-theme python3 qemu
+    papirus-icon-theme python3 qemu openvpn wireguard-tools
     remmina rustc rpi-imager spotify tree wget yt-dlp zed-editor
     gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
     python3Packages.virtualenv maven gradle jdk gnome-disk-utility
