@@ -170,17 +170,17 @@
     # from the original nixos-config list
     anki brave gh firefox efibootmgr fprintd bluez
     cargo curl distrobox github-copilot-cli spice spice-gtk spice-protocol
-    fastfetch gcc g++ git gdb jq jupyter keepassxc libreoffice-fresh
+    fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
     localsend lswt nano nodejs texmaker seahorse
     papirus-icon-theme python3 qemu openvpn wireguard-tools
-    remmina rustc rpi-imager spotify tree wget yt-dlp zed-editor
+    remmina rustc rpi-imager spotify tree wget zed-editor
     gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
     python3Packages.virtualenv maven gradle jdk gnome-disk-utility
 
     # merged in from the archway pkglists (pacman + aur), minus
     # vpn / tor / games / torrent apps, discord, and sbctl
     clang go ruby vim neovim lldb
-    dbeaver podman-desktop
+    dbeaver-bin podman-desktop cmake
     cups-pk-helper system-config-printer
     exfatprogs ntfsprogs btrfs-progs fuse2
     powertop smartmontools snapper
@@ -200,7 +200,7 @@
   ############################################################
   # Users
   ############################################################
-  users.users."nanda-kumudhan" = {
+  users.users."builder" = {
     isNormalUser = true;
     description = "Nanda Kumudhan";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "dialout" "adbusers" "input" "docker" ];
