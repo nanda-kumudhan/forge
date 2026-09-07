@@ -104,9 +104,7 @@
   ############################################################
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ intel-media-driver libva vulkan-loader ];
   };
-  hardware.cpu.intel.updateMicrocode = true;
   hardware.sane.enable = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
