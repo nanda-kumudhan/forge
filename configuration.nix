@@ -77,10 +77,10 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       autotiling foot grim htop imv dunst mpv kanshi
-      networkmanagerapplet nwg-look brightnessctl
+      nwg-look brightnessctl
       pavucontrol polkit_gnome slurp swaybg swayidle
       swaylock thunar waybar wdisplays wf-recorder
-      wl-clipboard zathura playerctl blueman rofi
+      zathura playerctl rofi
       xarchiver
     ];
   };
@@ -196,7 +196,7 @@
     exfatprogs ntfsprogs btrfs-progs fuse2
     powertop smartmontools snapper proton-vpn-cli
     noto-fonts noto-fonts-color-emoji torsocks
-    udiskie wmenu tor tor-browser prismlauncher
+    udiskie wmenu tor tor-browser
     texlive.combined.scheme-full texstudio
   ];
 
