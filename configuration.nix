@@ -70,7 +70,6 @@
     enable = true;
     wlr.enable = true;
     wlr.settings.screencast = {
-        output_name = "eDP-1";
         chooser_type = "dmenu";
         chooser_cmd = "${pkgs.rofi}/bin/rofi -dmenu -p 'Select Output:'";
       };	    
