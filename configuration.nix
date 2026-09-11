@@ -5,18 +5,13 @@
     ./hardware-configuration.nix
   ];
 
-  ############################################################
-  # Boot
-  ############################################################
   system.stateVersion = "26.05";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "msr" "uinput" ];
 
- ############################################################
-  # Networking
-  ############################################################
+
   networking.hostName = "forge";
   
   networking.networkmanager = {
@@ -31,11 +26,9 @@
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
 
-  # tailscale removed
+  
 
-  ############################################################
-  # Localization
-  ############################################################
+ 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
@@ -55,24 +48,9 @@
     variant = "";
   };
 
-  ############################################################
-  # Desktop Environments
-  #
-  # NOTE (read before relying on this): NixOS installs desktop
-  # packages system-wide - there is no built-in way to say
-  # "user A can only ever get Sway" and "user B can only ever
-  # get KDE" at the package level. Both sessions will be
-  # installed and SDDM will list both session types for
-  # whoever's at the login screen. What you *can* enforce is
-  # which session each account launches by default / is
-  # expected to use - true per-user lockdown would need extra
-  # work (e.g. PAM session restrictions or a wrapped session
-  # script). This config sets it up so you log in as
-  # nanda-kumudhan -> Sway, guest -> Plasma, but either account
-  # could technically pick the other session from the SDDM menu.
-  ############################################################
 
-  # Sway - primary session, intended for nanda-kumudhan
+
+
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -87,9 +65,7 @@
   };
 
  
-  ############################################################
-  # Desktop Portals (screen sharing, file pickers)
-  ############################################################
+ 
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -113,9 +89,7 @@
    };
   };
 
-  ############################################################
-  # Hardware
-  ############################################################
+
   hardware.graphics = {
     enable = true;
   };
@@ -124,9 +98,7 @@
   hardware.bluetooth.powerOnBoot = true;
   hardware.bluetooth.input.General.ClassicBondedOnly = false;
 
-  ############################################################
-  # Security
-  ############################################################
+
   security.polkit.enable = true;
   security.tpm2 = {
     enable = true;
@@ -138,9 +110,7 @@
   security.apparmor.packages = [ pkgs.apparmor-profiles ];
   security.apparmor.killUnconfinedConfinables = true;
 
-  ############################################################
-  # Services
-  ############################################################
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -162,9 +132,7 @@
     IdleActionSec = "15min";
   };
 
-  ############################################################
-  # Virtualisation
-  ############################################################
+
   virtualisation.podman = {
     enable = true;
   };
@@ -173,13 +141,10 @@
   virtualisation.waydroid.enable = true;
   programs.virt-manager.enable = true;
 
-  ############################################################
-  # Environment
-  ############################################################
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    # from the original nixos-config list
     anki brave gh firefox efibootmgr fprintd bluez
     cargo curl distrobox github-copilot-cli spice spice-gtk spice-protocol
     fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
@@ -189,8 +154,6 @@
     gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
     python3Packages.virtualenv maven gradle jdk gnome-disk-utility
     arduino-ide arduino-cli appimage-run
-    # merged in from the archway pkglists (pacman + aur), minus
-    # vpn / tor / games / torrent apps, discord, and sbctl
     clang go ruby vim neovim lldb transmission_4
     dbeaver-bin podman-desktop cmake
     cups-pk-helper system-config-printer
@@ -209,9 +172,6 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  ############################################################
-  # Users
-  ############################################################
   users.users."builder" = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "dialout" "adbusers" "input" "docker" ];
@@ -221,18 +181,6 @@
 
   programs.starship.enable = true;
 
-  ############################################################
-  # Display Manager
-  #
-  # Swapped greetd/tuigreet (which just launched straight into
-  # Sway for anyone) for SDDM, since we now need a session
-  # picker so nanda-kumudhan can choose Sway and uest can
-  # choose Plasma at login.
-  ############################################################
-
-  ############################################################
-  # Laptop Power Management
-  ############################################################
   services.power-profiles-daemon.enable = true;
 
   services.fstrim.enable = true;
@@ -240,7 +188,6 @@
   services.gnome.gnome-keyring.enable = true;
   services.displayManager.ly.enable = true;
   
-  # nix.gc block removed - no automatic garbage collection
 
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
