@@ -141,12 +141,9 @@
   virtualisation.waydroid.enable = true;
   programs.virt-manager.enable = true;
 
-
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
     anki brave gh firefox efibootmgr fprintd bluez
-    cargo curl distrobox github-copilot-cli spice spice-gtk spice-protocol
+    cargo curl distrobox spice spice-gtk spice-protocol
     fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
     localsend lswt nano nodejs seahorse materia-theme
     papirus-icon-theme python3 qemu openvpn wireguard-tools
