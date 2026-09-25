@@ -56,7 +56,7 @@
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       autotiling foot grim htop imv dunst mpv kanshi
-      nwg-look brightnessctl
+      nwg-look brightnessctl bluetui
       pavucontrol polkit_gnome slurp swaybg swayidle
       swaylock thunar waybar wdisplays wf-recorder
       zathura playerctl rofi
