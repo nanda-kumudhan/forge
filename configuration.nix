@@ -14,20 +14,6 @@
   system.stateVersion = "26.05";
   networking.hostName = "forge";
 
-  # Global Network Setup
-  networking.networkmanager = {
-    enable = true;
-    wifi = {
-      macAddress = "stable-ssid";
-      scanRandMacAddress = true;
-    };
-    ethernet.macAddress = "stable-ssid";
-    plugins = with pkgs; [
-      networkmanager-openvpn
-      networkmanager-openconnect
-    ];
-  };
-
   # Localization and Regional Formatting
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
