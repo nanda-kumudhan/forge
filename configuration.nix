@@ -8,17 +8,16 @@
   system.stateVersion = "26.05";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "msr" "uinput" ];
-
-
+  boot.initrd.luks.devices."luks-9f3b7c34-06ca-4c9d-91d8-64018e82263a".device = "/dev/disk/by-uuid/9f3b7c34-06ca-4c9d-91d8-64018e82263a";
+  boot.initrd.systemd.enable = true;
   networking.hostName = "forge";
   
   networking.networkmanager = {
     enable = true;
     plugins = with pkgs; [
       networkmanager-openvpn
-      networkmanager-wireguard
+      networkmanager-openconnect
     ];
   };
   
@@ -26,9 +25,7 @@
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
 
-  
-
- 
+  nixpkgs.config.allowUnfree = true; 
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
@@ -151,6 +148,7 @@
     telegram-desktop
     texstudio
     tor-browser
+    transmission_4-gtk
 
     # System & Hardware Utilities
     android-tools
@@ -217,18 +215,15 @@
     python3Packages.pipx
     python3Packages.virtualenv
     rpi-imager
-    ruby
     rustc
     seahorse
     texlive.combined.scheme-full
-    transmission-gtk
     tree
     vim
     zed-editor
 
     # Styling, Themes & Icons
    
-    materia-theme
     noto-fonts
     noto-fonts-color-emoji
     papirus-icon-theme
