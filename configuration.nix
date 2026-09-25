@@ -141,24 +141,99 @@
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
-    anki brave gh firefox efibootmgr fprintd bluez
-    cargo curl distrobox spice spice-gtk spice-protocol
-    fastfetch gcc git gdb jq jupyter keepassxc libreoffice-fresh
-    localsend lswt nano nodejs seahorse materia-theme
-    papirus-icon-theme python3 qemu openvpn wireguard-tools
-    remmina rustc rpi-imager tree wget zed-editor
-    gruvbox-dark-gtk python3Packages.ipython python3Packages.pip
-    python3Packages.virtualenv maven gradle jdk gnome-disk-utility
-    arduino-ide arduino-cli appimage-run
-    clang go ruby vim neovim lldb transmission_4
-    dbeaver-bin podman-desktop cmake
-    cups-pk-helper system-config-printer
-    exfatprogs ntfsprogs btrfs-progs fuse2
-    powertop smartmontools snapper proton-vpn-cli
-    noto-fonts noto-fonts-color-emoji torsocks
-    udiskie wmenu tor tor-browser
-    texlive.combined.scheme-full texstudio
+    # Applications & Browsers
+    anki
+    brave
+    firefox
+    keepassxc
+    libreoffice-fresh
+    localsend
+    telegram-desktop
+    texstudio
+    tor-browser
+
+    # System & Hardware Utilities
+    android-tools
+    appimage-run
+    bluez
+    btrfs-progs
+    cups-pk-helper
+    efibootmgr
+    exfatprogs
+    fprintd
+    fuse2
+    fwupd
+    gnome-disk-utility
+    networkmanagerapplet
+    ntfsprogs
+    powertop
+    proton-vpn-cli
+    qemu
+    qrencode
+    remmina
+    smartmontools
+    snapper
+    spice
+    spice-gtk
+    spice-protocol
+    system-config-printer
+    tor
+    torsocks
+    udiskie
+    unrar
+    unzip
+    wget
+    wmenu
+
+    # Development Toolchains & Environment
+    arduino-cli
+    arduino-ide
+    cargo
+    clang
+    cmake
+    curl
+    dbeaver-bin
+    distrobox
+    fastfetch
+    gcc
+    gdb
+    gh
+    git
+    go
+    gradle
+    jq
+    jdk
+    jupyter
+    lldb
+    lswt
+    maven
+    nano
+    neovim
+    nodejs
+    podman-desktop
+    python3
+    python3Packages.ipython
+    python3Packages.pip
+    python3Packages.pipx
+    python3Packages.virtualenv
+    rpi-imager
+    ruby
+    rustc
+    seahorse
+    texlive.combined.scheme-full
+    transmission-gtk
+    tree
+    vim
+    zed-editor
+
+    # Styling, Themes & Icons
+   
+    materia-theme
+    noto-fonts
+    noto-fonts-color-emoji
+    papirus-icon-theme
   ];
+
 
   programs.nix-ld.enable = true;
   services.dbus.enable = true;
@@ -177,8 +252,6 @@
 
   programs.starship.enable = true;
 
-  services.power-profiles-daemon.enable = true;
-
   services.fstrim.enable = true;
   security.pam.services.ly.enableGnomeKeyring = true;
   services.gnome.gnome-keyring.enable = true;
@@ -188,8 +261,25 @@
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
 
-  zramSwap = {
+ # 1. Disable power-profiles-daemon to eliminate backend scaling conflicts
+  services.power-profiles-daemon.enable = false;
+
+  # 2. Deploy TLP with the tlp-pd compatibility daemon wrapper
+  services.tlp = {
     enable = true;
-    memoryPercent = 50;
+    pd.enable = true; # Enforces the power-profiles-daemon D-Bus shim layer
+    
+    settings = {
+      # Automated profiles depending on hardware connection state
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+      # Battery health metrics for your T490s soldered power cells
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
   };
 }
