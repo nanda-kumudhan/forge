@@ -12,7 +12,7 @@
     thunar udiskie gnome-disk-utility seahorse xdg-utils
     
     # Internet, VPN & Networks
-    firefox telegram-desktop transmission_4-gtk tor-browser openconnect networkmanager-openconnect proton-vpn-cli
+    firefox brave telegram-desktop transmission_4-gtk tor-browser openconnect networkmanager-openconnect proton-vpn-cli
     
     # Maintenance Tools
     fwupd keepassxc powertop snapper smartmontools efibootmgr sbctl
