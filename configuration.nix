@@ -8,6 +8,7 @@
     ./modules/desktop.nix
     ./modules/security.nix
     ./modules/hardware.nix
+    ./modules/networking.nix
     ./modules/packages.nix
   ];
 
