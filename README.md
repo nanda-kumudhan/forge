@@ -1,6 +1,6 @@
-# NixOS Forge Configuration
+# NixOS Configuration
 
-Personal NixOS configuration for a **Lenovo ThinkPad T490s** running NixOS 26.05 (Yarara), with Sway/Wayland, TLP battery management, virtualization, development tooling, and a broad desktop application environment.
+Personal NixOS configuration for running NixOS 26.05 (Yarara), with Sway/Wayland, TLP battery management, virtualization, development tooling, and a broad desktop application environment.
 
 ## System Overview
 
@@ -9,10 +9,6 @@ Personal NixOS configuration for a **Lenovo ThinkPad T490s** running NixOS 26.05
 | Hostname | `forge` |
 | OS | NixOS 26.05 (Yarara) |
 | Architecture | x86_64 |
-| Hardware | Lenovo ThinkPad T490s |
-| Machine Type | `20NYS2LU00` |
-| CPU | Intel Core i7-8665U |
-| GPU | Intel UHD Graphics 620 |
 | Kernel | 6.18.53 |
 | Init | systemd 260.4 |
 | Desktop | Sway 1.12 |
