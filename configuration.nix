@@ -9,12 +9,27 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [ "msr" "uinput" ];
-  boot.initrd.luks.devices."luks-9f3b7c34-06ca-4c9d-91d8-64018e82263a".device = "/dev/disk/by-uuid/9f3b7c34-06ca-4c9d-91d8-64018e82263a";
+  #boot.initrd.luks.devices."luks-9f3b7c34-06ca-4c9d-91d8-64018e82263a".device = "/dev/disk/by-uuid/9f3b7c34-06ca-4c9d-91d8-64018e82263a";
+  boot.initrd.luks.devices."luks-9f3b7c34-06ca-4c9d-91d8-64018e82263a" = {
+    device = "/dev/disk/by-uuid/9f3b7c34-06ca-4c9d-91d8-64018e82263a";
+    crypttabExtraOpts = [ "tpm2-device=auto" ];
+  };
+  boot.resumeDevice =
+  "/dev/mapper/luks-9f3b7c34-06ca-4c9d-91d8-64018e82263a";
+
+
   boot.initrd.systemd.enable = true;
   networking.hostName = "forge";
   
   networking.networkmanager = {
     enable = true;
+    wifi = {
+    macAddress = "stable-ssid";        # new random MAC each connect
+    # "stable"  = stable hashed MAC
+    # "stable-ssid" = per-network stable MAC
+    scanRandMacAddress = true;    # default; randomize during scanning
+  };
+  ethernet.macAddress = "stable-ssid"; # optional, for wired
     plugins = with pkgs; [
       networkmanager-openvpn
       networkmanager-openconnect
