@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   boot.loader.systemd-boot.enable = false;
@@ -28,10 +28,11 @@
   boot.initrd.systemd.enable = true;
   boot.initrd.availableKernelModules = [ "tpm_tis" ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   specialisation = {
-    latest-kernel.configuration = {
-      system.nixos.tags = [ "latest-kernel" ];
-      boot.kernelPackages = pkgs.linuxPackages_latest;
+    lts-kernel.configuration = {
+      system.nixos.tags = [ "LTS" ];
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
     };
   };
 }
