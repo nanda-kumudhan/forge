@@ -1,33 +1,123 @@
 { config, pkgs, ... }:
 
 {
+  # Applications and command-line tools that are not configured as services.
   environment.systemPackages = with pkgs; [
-    # Core Utilities & Archives
-    p7zip unrar unzip xarchiver wget tree fastfetch jq
-    
-    # Fonts & Themes
-    nerd-fonts.jetbrains-mono papirus-icon-theme noto-fonts noto-fonts-color-emoji
+    # Core utilities and archives.
+    p7zip
+    unrar
+    unzip
+    xarchiver
+    wget
+    tree
+    fastfetch
+    jq
+    android-tools
+    qrencode
 
-    # File Managers & Desktops
-    thunar udiskie gnome-disk-utility seahorse xdg-utils
-    
-    # Internet, VPN & Networks
-    firefox brave telegram-desktop transmission_4-gtk tor-browser openconnect networkmanager-openconnect proton-vpn-cli
-    
-    # Maintenance Tools
-    fwupd keepassxc powertop snapper smartmontools efibootmgr sbctl
-    
-    # Virtualisation & Containers
-    qemu spice-gtk distrobox podman-desktop
-    
-    # Kubernetes Development Stack
-    kubectl kind minikube kubernetes-helm kustomize k9s kubectx
+    # Fonts and themes.
+    nerd-fonts.jetbrains-mono
+    papirus-icon-theme
+    noto-fonts
+    noto-fonts-color-emoji
+    croscorefonts
+    dejavu_fonts
+    liberation_ttf
+    materia-theme
 
-    # Computer Science Programming Toolchains
-    gcc clang cmake gdb lldb git gh go ruby rustc cargo jdk maven gradle dbeaver-bin
-    python3 python3Packages.pip python3Packages.pipx arduino-ide arduino-cli rpi-imager
+    # File management and desktop utilities.
+    thunar
+    udiskie
+    gnome-disk-utility
+    seahorse
+    xdg-utils
+    btrfs-progs
+    dosfstools
+    exfatprogs
+    ntfs3g
+    ntfsprogs-plus
+
+    # Browsers, messaging, file sharing, and VPN tools.
+    firefox
+    brave
+    discord
+    telegram-desktop
+    localsend
+    prismlauncher
+    transmission_4-gtk
+    tor-browser
+    openconnect
+    networkmanager-openconnect
+    proton-vpn-cli
     
-    # Editors, Readers & Document Systems
-    vim neovim zed-editor imv mpv zathura libreoffice-fresh anki texstudio texlive.combined.scheme-full
+    # Maintenance, firmware, and Secure Boot tools.
+    fwupd
+    keepassxc
+    gnome-keyring
+    libgnome-keyring
+    gcr
+    libayatana-indicator
+    powertop
+    snapper
+    smartmontools
+    efibootmgr
+    sbctl
+    fprintd
+    system-config-printer
+    zram-generator
+
+    # Virtualization and containers.
+    qemu
+    spice-gtk
+    distrobox
+    podman-desktop
+    docker-compose
+
+    # Kubernetes development stack.
+    kubectl
+    kind
+    minikube
+    kubernetes-helm
+    kustomize
+    k9s
+    kubectx
+
+    # Programming languages, build tools, and embedded tooling.
+    gcc
+    clang
+    cmake
+    gdb
+    lldb
+    git
+    gh
+    go
+    ruby
+    rustc
+    cargo
+    jdk
+    maven
+    gradle
+    dbeaver-bin
+    python3
+    python3Packages.pip
+    python3Packages.pipx
+    python3Packages.jupyterlab
+    arduino-ide
+    arduino-cli
+    rpi-imager
+
+    # Editors, media, office, and document tools.
+    vim
+    neovim
+    zed-editor
+    imv
+    mpv
+    zathura
+    libreoffice-fresh
+    anki
+    texstudio
+    texlive.combined.scheme-full
+    libpulse
+    network-manager-applet
   ];
 }

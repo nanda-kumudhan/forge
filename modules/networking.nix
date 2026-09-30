@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  # LocalSend uses this port for device discovery and file transfers.
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
 
-   # Global Network Setup
+  # NetworkManager handles wired, wireless, and VPN connections.
   networking.networkmanager = {
     enable = true;
     wifi = {

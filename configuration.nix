@@ -3,19 +3,19 @@
 {
   imports = [
     ./hardware-configuration.nix
-    # Load all modular sub-files directly here
     ./modules/boot.nix
     ./modules/desktop.nix
-    ./modules/security.nix
     ./modules/hardware.nix
     ./modules/networking.nix
     ./modules/packages.nix
+    ./modules/security.nix
   ];
 
+  # Keep this aligned with the NixOS release used to create the system.
   system.stateVersion = "26.05";
   networking.hostName = "forge";
 
-  # Localization and Regional Formatting
+  # Locale and keyboard configuration.
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
@@ -35,22 +35,32 @@
     variant = "";
   };
 
-  nixpkgs.config.allowUnfree = true; 
+  # Several desktop applications and drivers are unfree.
+  nixpkgs.config.allowUnfree = true;
   services.dbus.enable = true;
 
-  # Account Profile
-  users.users."builder" = {
+  # Primary local account.
+  users.users.builder = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "dialout" "adbusers" "input" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "kvm"
+      "dialout"
+      "adbusers"
+      "input"
+      "docker"
+    ];
   };
 
-  # Environments, Shells & Global Runtimes
+  # Development and shell conveniences.
   programs.nix-ld.enable = true;
   programs.starship.enable = true;
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
 
-  # Universal Styling Assets
+  # Fonts shared by the desktop and applications.
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

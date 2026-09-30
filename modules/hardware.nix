@@ -1,11 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  # Intel graphics and media acceleration.
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ intel-media-driver libvdpau-va-gl ];
+    extraPackages = with pkgs; [
+      intel-media-driver
+      libvdpau-va-gl
+    ];
   };
-  
+
+  # Scanner, Bluetooth, removable media, printing, and firmware services.
   hardware.sane.enable = true;
   hardware.bluetooth = {
     enable = true;
@@ -18,22 +23,24 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.printing.enable = true;
+  services.fprintd.enable = true;
   services.avahi = {
     enable = true;
     nssmdns4 = true;
   };
-  
+
   services.upower.enable = true;
   services.flatpak.enable = true;
   services.fstrim.enable = true;
-  
+  services.zram-generator.enable = true;
+
   services.logind.settings.Login = {
     HandlePowerKey = "suspend";
     IdleAction = "suspend";
     IdleActionSec = "15min";
   };
 
-  # Containers & Hardware Virtualization
+  # Containers and hardware virtualization.
   virtualisation.podman.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
@@ -41,7 +48,7 @@
   virtualisation.waydroid.enable = true;
   programs.virt-manager.enable = true;
 
-  # TLP Battery Optimizations for the T490s
+  # TLP battery management for the T490s.
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;

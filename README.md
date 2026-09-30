@@ -1,6 +1,8 @@
 # NixOS Configuration
 
-Personal NixOS configuration for running NixOS 26.05 (Yarara), with Sway/Wayland, TLP battery management, virtualization, development tooling, and a broad desktop application environment.
+Personal NixOS configuration for NixOS 26.05, with Sway/Wayland, TLP
+battery management, virtualization, development tooling, and a broad
+desktop application environment.
 
 ## System Overview
 
@@ -9,14 +11,11 @@ Personal NixOS configuration for running NixOS 26.05 (Yarara), with Sway/Wayland
 | Hostname | `forge` |
 | OS | NixOS 26.05 (Yarara) |
 | Architecture | x86_64 |
-| Kernel | 6.18.53 |
-| Init | systemd 260.4 |
-| Desktop | Sway 1.12 |
-| Display Protocol | Wayland |
-| Display | 1920×1080 @ 60 Hz |
-| Shell | Bash 5.3.9 |
-| Terminal | foot 1.27.0 |
-| Font | JetBrainsMono Nerd Font |
+| Default kernel | LTS |
+| Alternate kernel | Latest, through a systemd-boot specialisation |
+| Desktop | Sway/Wayland |
+| Shell | Bash with Starship |
+| Terminal | foot |
 | Audio | PipeWire |
 | Network | NetworkManager |
 | Bluetooth | BlueZ |
@@ -30,7 +29,23 @@ Personal NixOS configuration for running NixOS 26.05 (Yarara), with Sway/Wayland
 
 ## Repository Layout
 
+The repository is organised as a flake with feature-specific modules:
+
 ```text
-/etc/nixos/
+.
+├── flake.nix
+├── flake.lock
 ├── configuration.nix
-└── hardware-configuration.nix
+├── hardware-configuration.nix
+└── modules
+    ├── boot.nix
+    ├── desktop.nix
+    ├── hardware.nix
+    ├── networking.nix
+    ├── packages.nix
+    └── security.nix
+```
+
+`configuration.nix` assembles the modules. Hardware discovery remains in
+`hardware-configuration.nix`; service and feature configuration is grouped
+under `modules/`.
