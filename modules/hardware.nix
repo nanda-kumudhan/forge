@@ -37,13 +37,6 @@
   services.geoclue2.enable = true;
   # Enable BlueZ (Bluetooth daemon) to ensure A2DP/profile support via PipeWire
 
-  # Run bluetoothd with --experimental to expose GATT/Battery features used by some headsets
-  systemd.services.bluetooth = {
-    serviceConfig = {
-      ExecStart = "${pkgs.bluez}/bin/bluetoothd --experimental";
-    };
-  };
-
   services.logind.settings.Login = {
     HandlePowerKey = "suspend";
     IdleAction = "suspend";
