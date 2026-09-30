@@ -1,5 +1,7 @@
 # Forge NixOS Configuration
 
+![Desktop screenshot](assets/desktop.png)
+
 Personal NixOS configuration for the `forge` x86_64 system, targeting NixOS
 26.05. It provides a Sway/Wayland desktop, development tools, containers,
 virtualization, hardware support, and security services.
@@ -64,7 +66,3 @@ The configuration keeps kernel lockdown in integrity mode with
 `boot.kernelParams = [ "lockdown=integrity" ];`. After rebuilding with Secure
 Boot enabled, verify and sign new EFI files with `sbctl` as required by the
 local key setup.
-
-## Screenshot
-
-![Desktop screenshot](assets/desktop.png)
