@@ -17,6 +17,11 @@
     enable = true;
     powerOnBoot = true;
     input.General.ClassicBondedOnly = false;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
   };
   hardware.cpu.intel.updateMicrocode = true;
 

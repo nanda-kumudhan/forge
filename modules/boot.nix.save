@@ -24,7 +24,7 @@
 
   # The Latest kernel is the default; the LTS kernel remains available from
   # the systemd-boot specialisation menu.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
   specialisation.lts-kernel.configuration = {
     system.nixos.tags = [ "LTS" ];
     boot.kernelPackages = lib.mkForce pkgs.linuxPackages;

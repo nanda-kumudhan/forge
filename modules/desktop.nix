@@ -63,6 +63,8 @@
     jack.enable = true;
   };
 
+  services.blueman.enable = true;
+
   # Ly provides the graphical login screen for the Sway session.
   services.displayManager.ly.enable = true;
 }
