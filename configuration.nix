@@ -11,9 +11,6 @@
     ./modules/security.nix
   ];
 
-  # Enable Flakes and new NIX CLI
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];  
-
   # Keep this aligned with the NixOS release used to create the system.
   system.stateVersion = "26.05";
   networking.hostName = "forge";
@@ -53,8 +50,6 @@
       "dialout"
       "adbusers"
       "input"
-      # Docker uses this group for access to its Unix socket. Rootless Podman
-      # and Kubernetes do not require dedicated supplementary groups.
       "docker"
     ];
   };

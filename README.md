@@ -1,67 +1,52 @@
-# Forge — Personal NixOS configuration
+# NixOS Configuration
 
-This repository contains a personal NixOS configuration for the "forge" x86_64
-machine. It is primarily tested against NixOS 26.05 using the traditional
-channel-based workflow. A `flake.nix` is present but the channel workflow is
-the documented, supported approach here.
+A modular NixOS system configuration for a development machine named "forge".
 
-![Desktop screenshot](assets/desktop.png)
+## Overview
 
-Goals
-- Minimal, reproducible desktop with Sway/Wayland
-- Full developer toolset (C/C++, Rust, Go, Python, Java, editors)
-- Virtualization (QEMU/KVM, libvirt, Podman) and container tooling
-- Hardware support and power management for laptops/desktops
-- Hardened security defaults (TPM2, kernel lockdown, AppArmor, sbctl)
+This repository contains a complete NixOS system configuration with modular organization for easy maintenance and customization.
 
-Key features
-- Sway, PipeWire, Wayland portals, Ly (login manager), Flatpak, printing
-- LTS kernel by default; an option exists for `linuxPackages_latest`
-- libvirt/QEMU, virt-manager, SPICE USB redirection, Podman/Distrobox
-- TPM2 and sbctl-based Secure Boot signing workflow
+![Desktop](assets/desktop.png)
 
-Repository layout
+## System Information
 
-- configuration.nix — top-level configuration that imports modules
-- hardware-configuration.nix — hardware-specific auto-detected options
-- modules/ — grouped module files (boot, desktop, hardware, networking,
-  packages, security)
-- flake.nix & flake.lock — present for experimentation (not the recommended
-  workflow here)
-- assets/ — images and other static assets
+- **Hostname**: forge
+- **State Version**: 26.05
+- **Timezone**: Europe/London
+- **Locale**: en_GB.UTF-8
 
-Quickstart (channel-based)
+## Configuration Structure
 
-1. Add the NixOS 26.05 channel (run once):
+The configuration is organized into the following modules:
 
-   sudo nix-channel --add https://channels.nixos.org/nixos-26.05 nixos
-   sudo nix-channel --update
+- **`boot.nix`** - Boot and bootloader configuration
+- **`desktop.nix`** - Desktop environment setup
+- **`hardware.nix`** - Hardware-specific settings
+- **`networking.nix`** - Network configuration
+- **`packages.nix`** - System packages and software
+- **`security.nix`** - Security settings and policies
 
-2. Install the configuration:
+## Features
 
-   # copy or symlink this repo to /etc/nixos
-   sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix
+- Flakes and new Nix CLI experimental features enabled
+- Modular configuration structure for easy management
+- Hardware-specific configurations
+- Comprehensive package and security management
 
-Notes on Secure Boot
-- This configuration enables kernel lockdown (integrity mode). If Secure
-  Boot is enabled, sign new EFI files with `sbctl` according to your local
-  key setup after upgrading the system.
+## Getting Started
 
-Using flakes (optional)
-- A `flake.nix` exists for experimentation. If you prefer flakes, inspect
-  `flake.nix` to find the system name, then use e.g.
+To apply this configuration to your NixOS system:
 
-  sudo nixos-rebuild switch --flake /etc/nixos#forge
+```bash
+nixos-rebuild switch -I nixos-config=./configuration.nix
+```
 
-  (Replace `forge` with the appropriate output defined by the flake.)
+## Files
 
-Contributing / customization
-- Modules are small and focused. Add changes in `modules/` and reference them
-  from `configuration.nix`.
-- Hardware changes belong in `hardware-configuration.nix`.
+- `configuration.nix` - Main system configuration
+- `hardware-configuration.nix` - Hardware-specific settings
+- `modules/` - Modular configuration files
 
-Author
-- Maintained by @nanda-kumudhan
+---
 
-License
-- See repository for license information.
+Made with NixOS ❄️
