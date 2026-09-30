@@ -5,6 +5,8 @@ machine. It is primarily tested against NixOS 26.05 using the traditional
 channel-based workflow. A `flake.nix` is present but the channel workflow is
 the documented, supported approach here.
 
+![Desktop screenshot](assets/desktop.png)
+
 Goals
 - Minimal, reproducible desktop with Sway/Wayland
 - Full developer toolset (C/C++, Rust, Go, Python, Java, editors)
