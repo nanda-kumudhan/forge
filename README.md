@@ -1,6 +1,6 @@
 # NixOS Configuration
 
-A modular NixOS system configuration for a development machine named "forge".
+A stable, secure NixOS development environment for developers and CS students. Built with reliable stable channels—no experimental nonsense—designed to work seamlessly with Sway.
 
 ## Overview
 
@@ -28,10 +28,11 @@ The configuration is organized into the following modules:
 
 ## Features
 
-- Flakes and new Nix CLI experimental features enabled
-- Modular configuration structure for easy management
-- Hardware-specific configurations
-- Comprehensive package and security management
+- **Stable Channels** - Built on reliable NixOS stable channels, no flakes or experimental features
+- Secure and hardened configuration for safe development
+- Modular structure for easy maintenance and customization
+- Designed and optimized for Sway window manager
+- Comprehensive development tools and environment
 
 ## Getting Started
 
