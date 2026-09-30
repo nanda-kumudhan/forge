@@ -1,7 +1,7 @@
 # Forge NixOS Configuration
 
-Personal NixOS flake for the `forge` x86_64 system, targeting NixOS 26.05.
-It provides a Sway/Wayland desktop, development tools, containers,
+Personal NixOS configuration for the `forge` x86_64 system, targeting NixOS
+26.05. It provides a Sway/Wayland desktop, development tools, containers,
 virtualization, hardware support, and security services.
 
 ## Highlights
@@ -21,8 +21,6 @@ virtualization, hardware support, and security services.
 
 ```text
 .
-├── flake.nix
-├── flake.lock
 ├── configuration.nix
 ├── hardware-configuration.nix
 └── modules
@@ -40,17 +38,21 @@ virtualization, hardware support, and security services.
 
 ## Usage
 
-Check the flake:
+Add the stable channel once:
 
 ```bash
-nix flake check
+sudo nix-channel --add https://channels.nixos.org/nixos-26.05 nixos
+sudo nix-channel --update
 ```
 
-Build or switch to the `forge` configuration:
+Copy or symlink this repository into `/etc/nixos`, then build the
+channel-based configuration:
 
 ```bash
-sudo nixos-rebuild switch --flake .#forge
+sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix
 ```
 
-After rebuilding with Secure Boot enabled, verify and sign new EFI files with
-`sbctl` as required by the local key setup.
+The configuration keeps kernel lockdown in integrity mode with
+`boot.kernelParams = [ "lockdown=integrity" ];`. After rebuilding with Secure
+Boot enabled, verify and sign new EFI files with `sbctl` as required by the
+local key setup.

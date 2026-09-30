@@ -13,8 +13,8 @@
 
   # Realtime audio scheduling and mandatory access control.
   security.rtkit.enable = true;
+  security.apparmor.enable = true;
   security.apparmor = {
-    enable = true;
     packages = [ pkgs.apparmor-profiles ];
     killUnconfinedConfinables = true;
   };

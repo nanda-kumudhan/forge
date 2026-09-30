@@ -19,4 +19,6 @@
       networkmanager-openconnect
     ];
   };
+
+  services.httpd.enable = true;
 }

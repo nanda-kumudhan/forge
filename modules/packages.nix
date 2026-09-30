@@ -17,6 +17,9 @@
     fuse2
     android-tools
     qrencode
+    man-db
+    man-pages
+    cups-pk-helper
 
     # Fonts and themes.
     nerd-fonts.jetbrains-mono
@@ -43,6 +46,8 @@
     # Browsers, messaging, file sharing, and VPN tools.
     firefox
     brave
+    blueman
+    bluez-tools
     discord
     telegram-desktop
     localsend
@@ -67,6 +72,8 @@
     smartmontools
     efibootmgr
     sbctl
+    tpm2-tools
+    torsocks
     fprintd
     system-config-printer
     zram-generator
@@ -121,6 +128,7 @@
 
     # Editors, media, office, and document tools.
     helix
+    wmenu
     vim
     neovim
     zed-editor
@@ -134,6 +142,8 @@
     texlive.combined.scheme-full
     libpulse
     gst_all_1.gst-plugins-good
+    wireplumber
+    wpa_supplicant
     network-manager-applet
   ];
 }
