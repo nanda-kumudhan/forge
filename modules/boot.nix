@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [ "msr" "uinput" ];
 
@@ -20,19 +20,14 @@
 
   boot.resumeDevice = "/dev/mapper/luks-9f3b7c34-06ca-4c9d-91d8-64018e82263a";
   
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };  
-
   boot.initrd.systemd.enable = true;
   boot.initrd.availableKernelModules = [ "tpm_tis" ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   specialisation = {
-    lts-kernel.configuration = {
-      system.nixos.tags = [ "LTS" ];
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
+    latest-kernel.configuration = {
+      system.nixos.tags = [ "Latest" ];
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     };
   };
 }
