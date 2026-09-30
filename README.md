@@ -1,35 +1,23 @@
-# NixOS Configuration
+# Forge NixOS Configuration
 
-Personal NixOS configuration for NixOS 26.05, with Sway/Wayland, TLP
-battery management, virtualization, development tooling, and a broad
-desktop application environment.
+Personal NixOS flake for the `forge` x86_64 system, targeting NixOS 26.05.
+It provides a Sway/Wayland desktop, development tools, containers,
+virtualization, hardware support, and security services.
 
-## System Overview
+## Highlights
 
-| Component | Configuration |
-|---|---|
-| Hostname | `forge` |
-| OS | NixOS 26.05 (Yarara) |
-| Architecture | x86_64 |
-| Default kernel | LTS |
-| Alternate kernel | Latest, through a systemd-boot specialisation |
-| Desktop | Sway/Wayland |
-| Shell | Bash with Starship |
-| Terminal | foot |
-| Audio | PipeWire |
-| Network | NetworkManager |
-| Bluetooth | BlueZ |
-| Firewall | Enabled |
-| Bootloader | systemd-boot |
-| Virtualization | KVM/QEMU, libvirt, Podman, Docker, Waydroid |
-| Battery management | TLP |
-| Battery thresholds | 75–80% |
+- **Desktop:** Sway, Wayland portals, PipeWire, Ly, Bluetooth, printing, and
+  Flatpak.
+- **Kernels:** LTS by default, with `linuxPackages_latest` available through
+  the `latest-kernel` systemd-boot specialisation.
+- **Virtualization:** QEMU/KVM through libvirt and virt-manager, with SPICE
+  USB redirection, Podman, Docker, Distrobox, and Waydroid.
+- **Development:** C/C++, Java, Python, Rust, Go, Ruby, Kubernetes, Arduino,
+  LaTeX, DBeaver, Helix, Neovim, and Zed.
+- **Security:** TPM2 support, AppArmor, kernel lockdown integrity mode, and
+  `sbctl` for manual Secure Boot signing.
 
----
-
-## Repository Layout
-
-The repository is organised as a flake with feature-specific modules:
+## Layout
 
 ```text
 .
@@ -46,6 +34,23 @@ The repository is organised as a flake with feature-specific modules:
     └── security.nix
 ```
 
-`configuration.nix` assembles the modules. Hardware discovery remains in
-`hardware-configuration.nix`; service and feature configuration is grouped
-under `modules/`.
+`configuration.nix` assembles the modules. Hardware discovery is kept in
+`hardware-configuration.nix`; services and feature groups live under
+`modules/`.
+
+## Usage
+
+Check the flake:
+
+```bash
+nix flake check
+```
+
+Build or switch to the `forge` configuration:
+
+```bash
+sudo nixos-rebuild switch --flake .#forge
+```
+
+After rebuilding with Secure Boot enabled, verify and sign new EFI files with
+`sbctl` as required by the local key setup.
