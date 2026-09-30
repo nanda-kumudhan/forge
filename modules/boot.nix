@@ -6,11 +6,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Restrict unsigned kernel-level modifications while retaining module loading.
-  boot.kernelParams = [
+  boot.kernelParams = [ 
     "lockdown=integrity" 
-    "lsm=landlock,lockdown,yama,integrity,apparmor,bpf"
+    "lsm=landlock,yama,apparmor,bpf,lockdown" 
   ];
-
   boot.kernelModules = [ "msr" "uinput" ];
 
   # Use systemd in the initrd so TPM and encrypted-volume activation are

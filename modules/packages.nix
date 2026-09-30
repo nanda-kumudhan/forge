@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  
   # Applications and command-line tools that are not configured as services.
   environment.systemPackages = with pkgs; [
     # Core utilities and archives.
@@ -65,6 +64,7 @@
     keepassxc
     gnome-keyring
     libgnome-keyring
+    polkit_gnome
     gcr
     libayatana-indicator
     powertop
@@ -125,6 +125,7 @@
     arduino-ide
     arduino-cli
     rpi-imager
+    github-copilot-cli    
 
     # Editors, media, office, and document tools.
     helix
