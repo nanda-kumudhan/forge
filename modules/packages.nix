@@ -12,6 +12,9 @@
     tree
     fastfetch
     jq
+    cowsay
+    dmidecode
+    fuse2
     android-tools
     qrencode
 
@@ -49,6 +52,8 @@
     openconnect
     networkmanager-openconnect
     proton-vpn-cli
+    remmina
+    spotify
     
     # Maintenance, firmware, and Secure Boot tools.
     fwupd
@@ -68,6 +73,7 @@
 
     # Virtualization and containers.
     qemu
+    systemdUkify
     spice-gtk
     distrobox
     podman-desktop
@@ -85,7 +91,11 @@
     # Programming languages, build tools, and embedded tooling.
     gcc
     clang
+    gnumake
     cmake
+    pkg-config
+    autoconf
+    automake
     gdb
     lldb
     git
@@ -98,26 +108,32 @@
     maven
     gradle
     dbeaver-bin
+    nano
+    nix
     python3
     python3Packages.pip
     python3Packages.pipx
+    python3Packages.virtualenv
     python3Packages.jupyterlab
     arduino-ide
     arduino-cli
     rpi-imager
 
     # Editors, media, office, and document tools.
+    helix
     vim
     neovim
     zed-editor
     imv
     mpv
     zathura
+    zathuraPkgs.zathura_pdf_poppler
     libreoffice-fresh
     anki
     texstudio
     texlive.combined.scheme-full
     libpulse
+    gst_all_1.gst-plugins-good
     network-manager-applet
   ];
 }

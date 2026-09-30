@@ -9,6 +9,7 @@
       libvdpau-va-gl
     ];
   };
+  hardware.firmware = [ pkgs.sof-firmware ];
 
   # Scanner, Bluetooth, removable media, printing, and firmware services.
   hardware.sane.enable = true;
@@ -43,7 +44,10 @@
   # Containers and hardware virtualization.
   virtualisation.podman.enable = true;
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.package = pkgs.qemu_kvm;
+  };
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.waydroid.enable = true;
   programs.virt-manager.enable = true;
