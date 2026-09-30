@@ -22,11 +22,11 @@
   boot.initrd.systemd.enable = true;
   boot.initrd.availableKernelModules = [ "tpm_tis" ];
 
-  # The LTS kernel is the default; the newer kernel remains available from
+  # The Latest kernel is the default; the LTS kernel remains available from
   # the systemd-boot specialisation menu.
-  boot.kernelPackages = pkgs.linuxPackages;
-  specialisation.latest-kernel.configuration = {
-    system.nixos.tags = [ "Latest" ];
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+  specialisation.lts-kernel.configuration = {
+    system.nixos.tags = [ "LTS" ];
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
   };
 }
