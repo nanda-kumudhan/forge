@@ -1,66 +1,65 @@
-# Forge NixOS Configuration
+# Forge — Personal NixOS configuration
 
-Personal NixOS configuration for the `forge` x86_64 system, targeting NixOS
-26.05. It provides a Sway/Wayland desktop, development tools, containers,
-virtualization, hardware support, and security services.
+This repository contains a personal NixOS configuration for the "forge" x86_64
+machine. It is primarily tested against NixOS 26.05 using the traditional
+channel-based workflow. A `flake.nix` is present but the channel workflow is
+the documented, supported approach here.
 
-## Highlights
+Goals
+- Minimal, reproducible desktop with Sway/Wayland
+- Full developer toolset (C/C++, Rust, Go, Python, Java, editors)
+- Virtualization (QEMU/KVM, libvirt, Podman) and container tooling
+- Hardware support and power management for laptops/desktops
+- Hardened security defaults (TPM2, kernel lockdown, AppArmor, sbctl)
 
-- **Desktop:** Sway, Wayland portals, PipeWire, Ly, Bluetooth, printing, and
-  Flatpak.
-- **Kernels:** LTS by default, with `linuxPackages_latest` available through
-  the `latest-kernel` systemd-boot specialisation.
-- **Virtualization:** QEMU/KVM through libvirt and virt-manager, with SPICE
-  USB redirection, Podman, Docker, Distrobox, and Waydroid.
-- **Development:** C/C++, Java, Python, Rust, Go, Ruby, Kubernetes, Arduino,
-  LaTeX, DBeaver, Helix, Neovim, and Zed.
-- **Security:** TPM2 support, AppArmor, kernel lockdown integrity mode, and
-  `sbctl` for manual Secure Boot signing.
+Key features
+- Sway, PipeWire, Wayland portals, Ly (login manager), Flatpak, printing
+- LTS kernel by default; an option exists for `linuxPackages_latest`
+- libvirt/QEMU, virt-manager, SPICE USB redirection, Podman/Distrobox
+- TPM2 and sbctl-based Secure Boot signing workflow
 
-## Current approach
+Repository layout
 
-This repository deliberately uses the traditional stable NixOS channel
-workflow for now. Flakes are not being used while the syntax and workflow are
-still being learned, and Lanzaboote is not being used after a boot failure
-involving the `lzbt` issue. The configuration uses native systemd-boot with
-manual `sbctl` signing instead.
+- configuration.nix — top-level configuration that imports modules
+- hardware-configuration.nix — hardware-specific auto-detected options
+- modules/ — grouped module files (boot, desktop, hardware, networking,
+  packages, security)
+- flake.nix & flake.lock — present for experimentation (not the recommended
+  workflow here)
+- assets/ — images and other static assets
 
-## Layout
+Quickstart (channel-based)
 
-```text
-.
-├── configuration.nix
-├── hardware-configuration.nix
-└── modules
-    ├── boot.nix
-    ├── desktop.nix
-    ├── hardware.nix
-    ├── networking.nix
-    ├── packages.nix
-    └── security.nix
-```
+1. Add the NixOS 26.05 channel (run once):
 
-`configuration.nix` assembles the modules. Hardware discovery is kept in
-`hardware-configuration.nix`; services and feature groups live under
-`modules/`.
+   sudo nix-channel --add https://channels.nixos.org/nixos-26.05 nixos
+   sudo nix-channel --update
 
-## Usage
+2. Install the configuration:
 
-Add the stable channel once:
+   # copy or symlink this repo to /etc/nixos
+   sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix
 
-```bash
-sudo nix-channel --add https://channels.nixos.org/nixos-26.05 nixos
-sudo nix-channel --update
-```
+Notes on Secure Boot
+- This configuration enables kernel lockdown (integrity mode). If Secure
+  Boot is enabled, sign new EFI files with `sbctl` according to your local
+  key setup after upgrading the system.
 
-Copy or symlink this repository into `/etc/nixos`, then build the
-channel-based configuration:
+Using flakes (optional)
+- A `flake.nix` exists for experimentation. If you prefer flakes, inspect
+  `flake.nix` to find the system name, then use e.g.
 
-```bash
-sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix
-```
+  sudo nixos-rebuild switch --flake /etc/nixos#forge
 
-The configuration keeps kernel lockdown in integrity mode with
-`boot.kernelParams = [ "lockdown=integrity" ];`. After rebuilding with Secure
-Boot enabled, verify and sign new EFI files with `sbctl` as required by the
-local key setup.
+  (Replace `forge` with the appropriate output defined by the flake.)
+
+Contributing / customization
+- Modules are small and focused. Add changes in `modules/` and reference them
+  from `configuration.nix`.
+- Hardware changes belong in `hardware-configuration.nix`.
+
+Author
+- Maintained by @nanda-kumudhan
+
+License
+- See repository for license information.
