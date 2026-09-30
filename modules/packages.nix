@@ -87,8 +87,7 @@
     distrobox
     podman-desktop
     docker-compose
-    waydroid-helper
-
+    
     # Kubernetes development stack.
     kubectl
     kind
