@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  
   # Applications and command-line tools that are not configured as services.
   environment.systemPackages = with pkgs; [
     # Core utilities and archives.
@@ -26,7 +27,6 @@
     papirus-icon-theme
     noto-fonts
     noto-fonts-color-emoji
-    croscorefonts
     dejavu_fonts
     liberation_ttf
     materia-theme
@@ -140,10 +140,9 @@
     anki
     texstudio
     texlive.combined.scheme-full
-    libpulse
     gst_all_1.gst-plugins-good
     wireplumber
     wpa_supplicant
-    network-manager-applet
+    networkmanagerapplet
   ];
 }
