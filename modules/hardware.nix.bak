@@ -36,6 +36,7 @@
   services.zram-generator.enable = true;
   services.geoclue2.enable = true;
   # Enable BlueZ (Bluetooth daemon) to ensure A2DP/profile support via PipeWire
+  services.bluetooth.enable = true;
 
   # Run bluetoothd with --experimental to expose GATT/Battery features used by some headsets
   systemd.services.bluetooth = {

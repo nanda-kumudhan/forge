@@ -10,8 +10,13 @@
     "lockdown=integrity" 
     "lsm=landlock,yama,apparmor,bpf,lockdown" 
   ];
-  boot.kernelModules = [ "msr" "uinput" ];
-
+  boot.kernelModules = [ "msr" "uinput"  "nf_tables"
+     "nf_conntrack"
+     "nf_nat"
+     "nft_ct"
+     "nft_chain_nat"
+     "nft_masq"
+  ];
   # Use systemd in the initrd so TPM and encrypted-volume activation are
   # handled by the same service manager as the running system.
   boot.initrd.systemd.enable = true;

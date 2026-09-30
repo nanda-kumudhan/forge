@@ -21,4 +21,5 @@
   };
 
   services.httpd.enable = true;
+  #networking.nftables.enable = true;
 }

@@ -148,7 +148,5 @@
     wireplumber
     wpa_supplicant
     networkmanagerapplet
-    dnsmasq
-    nftables
   ];
 }

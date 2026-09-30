@@ -1,7 +1,5 @@
 # Forge NixOS Configuration
 
-![Desktop screenshot](assets/desktop.png)
-
 Personal NixOS configuration for the `forge` x86_64 system, targeting NixOS
 26.05. It provides a Sway/Wayland desktop, development tools, containers,
 virtualization, hardware support, and security services.
