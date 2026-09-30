@@ -64,3 +64,7 @@ The configuration keeps kernel lockdown in integrity mode with
 `boot.kernelParams = [ "lockdown=integrity" ];`. After rebuilding with Secure
 Boot enabled, verify and sign new EFI files with `sbctl` as required by the
 local key setup.
+
+## Screenshot
+
+![Desktop screenshot](assets/desktop.png)
