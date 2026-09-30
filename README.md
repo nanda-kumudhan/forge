@@ -17,6 +17,14 @@ virtualization, hardware support, and security services.
 - **Security:** TPM2 support, AppArmor, kernel lockdown integrity mode, and
   `sbctl` for manual Secure Boot signing.
 
+## Current approach
+
+This repository deliberately uses the traditional stable NixOS channel
+workflow for now. Flakes are not being used while the syntax and workflow are
+still being learned, and Lanzaboote is not being used after a boot failure
+involving the `lzbt` issue. The configuration uses native systemd-boot with
+manual `sbctl` signing instead.
+
 ## Layout
 
 ```text

@@ -50,6 +50,8 @@
       "dialout"
       "adbusers"
       "input"
+      # Docker uses this group for access to its Unix socket. Rootless Podman
+      # and Kubernetes do not require dedicated supplementary groups.
       "docker"
     ];
   };
