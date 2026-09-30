@@ -16,6 +16,7 @@
     dmidecode
     fuse2
     android-tools
+    wl-clipboard
     qrencode
     man-db
     man-pages
@@ -85,6 +86,7 @@
     distrobox
     podman-desktop
     docker-compose
+    waydroid-helper
 
     # Kubernetes development stack.
     kubectl

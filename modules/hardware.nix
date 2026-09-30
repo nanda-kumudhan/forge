@@ -34,6 +34,8 @@
   services.flatpak.enable = true;
   services.fstrim.enable = true;
   services.zram-generator.enable = true;
+  services.geoclue2.enable = true;
+  programs.adb.enable = true;
 
   services.logind.settings.Login = {
     HandlePowerKey = "suspend";
@@ -49,8 +51,16 @@
     qemu.package = pkgs.qemu_kvm;
   };
   virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.waydroid.enable = true;
+  virtualisation.waydroid = {
+    enable = true;
+    package = pkgs.waydroid-nftables;
+  };
   programs.virt-manager.enable = true;
+
+  systemd = {
+    packages = [ pkgs.waydroid-helper ];
+    services.waydroid-mount.wantedBy = [ "multi-user.target" ];
+  };
 
   # TLP battery management for the T490s.
   services.power-profiles-daemon.enable = false;
