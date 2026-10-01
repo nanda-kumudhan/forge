@@ -72,7 +72,6 @@
 
     # Programming languages, build tools, and embedded tooling.
     nixd
-    nixl
     nixfmt
     nixpkgs-fmt
     bash-language-server
