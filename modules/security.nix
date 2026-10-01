@@ -21,7 +21,6 @@
 
   # Unlock the GNOME keyring through the Ly login session.
   security.pam.services.ly.enableGnomeKeyring = true;
-  security.pam.services.ly.fprintAuth = true;
   services.gnome.gnome-keyring.enable = true;
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {

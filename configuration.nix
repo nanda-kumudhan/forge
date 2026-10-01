@@ -6,9 +6,12 @@
     ./modules/boot.nix
     ./modules/desktop.nix
     ./modules/hardware.nix
+    ./modules/laptop.nix
     ./modules/networking.nix
     ./modules/packages.nix
     ./modules/security.nix
+    ./modules/virtualisation.nix
+    ./modules/development.nix
   ];
 
   # Keep this aligned with the NixOS release used to create the system.
@@ -36,7 +39,6 @@
   };
 
   # Several desktop applications and drivers are unfree.
-  nixpkgs.config.allowUnfree = true;
   services.dbus.enable = true;
 
   # Primary local account.

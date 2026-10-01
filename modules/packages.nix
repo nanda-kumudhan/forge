@@ -1,18 +1,19 @@
 { config, pkgs, ... }:
 
 {
+
+  nixpkgs.config.allowUnfree = true;
+
   # Applications and command-line tools that are not configured as services.
   environment.systemPackages = with pkgs; [
     # Core utilities and archives.
     p7zip
     unrar
     unzip
-    xarchiver
     wget
     tree
     fastfetch
     jq
-    cowsay
     dmidecode
     fuse2
     android-tools
@@ -32,7 +33,6 @@
     materia-theme
 
     # File management and desktop utilities.
-    thunar
     udiskie
     gnome-disk-utility
     seahorse
@@ -46,9 +46,6 @@
     # Browsers, messaging, file sharing, and VPN tools.
     firefox
     brave
-    blueman
-    bluez-tools
-    bluez
     discord
     telegram-desktop
     localsend
@@ -56,100 +53,43 @@
     transmission_4-gtk
     tor-browser
     openconnect
-    networkmanager-openconnect
-    networkmanager-openvpn
     proton-vpn-cli
     wireguard-tools
     remmina
     spotify
-    
+
     # Maintenance, firmware, and Secure Boot tools.
     fwupd
     keepassxc
-    gnome-keyring
-    libgnome-keyring
-    polkit_gnome
     gcr
-    libayatana-indicator
     powertop
-    snapper
     smartmontools
     efibootmgr
     sbctl
     tpm2-tools
     torsocks
-    fprintd
     system-config-printer
-    zram-generator
-
-    # Virtualization and containers.
-    qemu
-    systemdUkify
-    spice-gtk
-    distrobox
-    podman-desktop
-    docker-compose
-    
-    # Kubernetes development stack.
-    kubectl
-    kind
-    minikube
-    kubernetes-helm
-    kustomize
-    k9s
-    kubectx
 
     # Programming languages, build tools, and embedded tooling.
-    gcc
-    clang
-    gnumake
-    cmake
-    pkg-config
-    autoconf
-    automake
-    gdb
-    lldb
     git
     gh
-    go
-    ruby
-    rustc
-    cargo
-    jdk
-    maven
-    gradle
     dbeaver-bin
-    nano
-    nix
-    python3
-    python3Packages.pip
-    python3Packages.pipx
-    python3Packages.virtualenv
-    python3Packages.jupyterlab
     arduino-ide
     arduino-cli
     rpi-imager
-    github-copilot-cli    
+    github-copilot-cli
 
     # Editors, media, office, and document tools.
+    nano
     helix
-    wmenu
     vim
     neovim
     zed-editor
-    imv
-    mpv
-    zathura
-    zathuraPkgs.zathura_pdf_poppler
+
     libreoffice-fresh
     anki
     texstudio
     texlive.combined.scheme-full
-    gst_all_1.gst-plugins-good
-    wireplumber
-    wpa_supplicant
     networkmanagerapplet
-    dnsmasq
-    nftables
   ];
 }

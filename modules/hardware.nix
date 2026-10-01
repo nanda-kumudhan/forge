@@ -29,7 +29,6 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.printing.enable = true;
-  services.fprintd.enable = true;
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -38,7 +37,14 @@
   services.upower.enable = true;
   services.flatpak.enable = true;
   services.fstrim.enable = true;
-  services.zram-generator.enable = true;
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25;
+    algorithm = "lz4";
+  };
+  boot.kernel.sysctl."vm.page-cluster" = 0;
+
   services.geoclue2.enable = true;
   # Enable BlueZ (Bluetooth daemon) to ensure A2DP/profile support via PipeWire
 
@@ -46,24 +52,6 @@
     HandlePowerKey = "suspend";
     IdleAction = "suspend";
     IdleActionSec = "15min";
-  };
-
-  # Containers and hardware virtualization.
-  virtualisation.podman.enable = true;
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.package = pkgs.qemu_kvm;
-  };
-  virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.waydroid = {
-    enable = true;
-    package = pkgs.waydroid-nftables;
-  };
-  programs.virt-manager.enable = true;
-
-  systemd = {
-    services.waydroid-mount.wantedBy = [ "multi-user.target" ];
   };
 
   # TLP battery management for the T490s.
