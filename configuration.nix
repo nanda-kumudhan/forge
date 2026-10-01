@@ -66,7 +66,10 @@
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  }
 
   # Fonts shared by the desktop and applications.
   fonts.enableDefaultPackages = true;
