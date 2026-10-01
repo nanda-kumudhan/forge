@@ -40,7 +40,7 @@
 
   zramSwap = {
     enable = true;
-    memoryPercent = 25;
+    memoryPercent = 50;
     algorithm = "lz4";
   };
   boot.kernel.sysctl."vm.page-cluster" = 0;
