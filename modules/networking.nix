@@ -21,5 +21,6 @@
   };
 
   services.httpd.enable = true;
+  networking.firewall.checkReversePath = false;
   #networking.nftables.enable = true;
 }

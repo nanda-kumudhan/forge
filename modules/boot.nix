@@ -10,7 +10,8 @@
     "lockdown=integrity" 
     "lsm=landlock,yama,apparmor,bpf,lockdown" 
   ];
-  boot.kernelModules = [ "msr" "uinput"  "nf_tables"
+  boot.kernelModules = [ "msr" "uinput" "dummy" "wireguard"
+     "nf_tables"
      "nf_conntrack"
      "nf_nat"
      "nft_ct"

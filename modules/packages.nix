@@ -57,7 +57,9 @@
     tor-browser
     openconnect
     networkmanager-openconnect
+    networkmanager-openvpn
     proton-vpn-cli
+    wireguard-tools
     remmina
     spotify
     
