@@ -72,7 +72,11 @@
 
     # Programming languages, build tools, and embedded tooling.
     nixd
+    nixl
     nixfmt
+    nixpkgs-fmt
+    bash-language-server
+    marksman
     git
     gh
     dbeaver-bin

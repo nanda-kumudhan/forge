@@ -69,7 +69,7 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  }
+  };
 
   # Fonts shared by the desktop and applications.
   fonts.enableDefaultPackages = true;
