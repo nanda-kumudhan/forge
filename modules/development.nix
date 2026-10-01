@@ -9,6 +9,10 @@
 
   # Host-wide toolchains. Hosts that import this get them permanently.
   environment.systemPackages = with pkgs; [
+
+    nixd
+    nil
+
     # C/C++ toolchain and build systems.
     gcc
     clang
