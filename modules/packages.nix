@@ -71,6 +71,8 @@
     system-config-printer
 
     # Programming languages, build tools, and embedded tooling.
+    nixd
+    nixfmt
     git
     gh
     dbeaver-bin
