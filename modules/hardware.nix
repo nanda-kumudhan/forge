@@ -45,6 +45,15 @@
   };
   boot.kernel.sysctl."vm.page-cluster" = 0;
 
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true; # needs a notification daemon (e.g. mako)
+    extraArgs = [
+      "--avoid"
+      "(^|/)(sway|systemd|Xwayland)$"
+    ];
+  };
+
   services.geoclue2.enable = true;
   # Enable BlueZ (Bluetooth daemon) to ensure A2DP/profile support via PipeWire
 
