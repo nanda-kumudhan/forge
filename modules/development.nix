@@ -28,10 +28,12 @@
     go
     ruby
     rustc
+    rustup
     cargo
     jdk
     maven
     gradle
+    nodejs
 
     # Python and extras.
     python3
