@@ -22,9 +22,11 @@ The configuration is organized into the following modules:
 - **`boot.nix`** - Boot and bootloader configuration
 - **`desktop.nix`** - Desktop environment setup
 - **`hardware.nix`** - Hardware-specific settings
+- **`laptop.nix`** - ThinkPad T490s power management (TLP), fingerprint login, battery thresholds
 - **`networking.nix`** - Network configuration
 - **`packages.nix`** - System packages and software
 - **`security.nix`** - Security settings and policies
+- **`virtualisation.nix`** - Virtualisation and container setup
 
 ## Features
 

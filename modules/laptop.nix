@@ -19,5 +19,6 @@
     };
   };
   services.fprintd.enable = true;
+  services.thermald.enable = true;
 
 }
