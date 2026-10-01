@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -11,7 +16,6 @@
     ./modules/packages.nix
     ./modules/security.nix
     ./modules/virtualisation.nix
-    ./modules/development.nix
   ];
 
   # Keep this aligned with the NixOS release used to create the system.

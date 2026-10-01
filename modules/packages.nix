@@ -78,6 +78,8 @@
     arduino-cli
     rpi-imager
     github-copilot-cli
+    nil
+    nixd
 
     # Editors, media, office, and document tools.
     nano
