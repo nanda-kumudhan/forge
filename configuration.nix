@@ -16,6 +16,7 @@
     ./modules/packages.nix
     ./modules/security.nix
     ./modules/virtualisation.nix
+    ./modules/compat.nix
   ];
 
   # Keep this aligned with the NixOS release used to create the system.

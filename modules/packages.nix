@@ -73,12 +73,12 @@
     # Programming languages, build tools, and embedded tooling.
     nixd
     nixfmt
-    nixpkgs-fmt
     bash-language-server
     marksman
     git
     gh
     dbeaver-bin
+    android-studio
     arduino-ide
     arduino-cli
     rpi-imager
