@@ -31,12 +31,12 @@
     pipewire
     wayland
     libxkbcommon
-    xorg.libX11
-    xorg.libXext
-    xorg.libxcb
-    xorg.libXcomposite
-    xorg.libXdamage
-    xorg.libXfixes
+    libx11
+    libxext
+    libxcb
+    libxcomposite
+    libxdamage
+    libxfixes
     libxrandr
     libxrender
     libxtst
