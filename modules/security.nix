@@ -1,26 +1,27 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  # Desktop authorization and privileged helper policy.
-  security.polkit.enable = true;
+  security = {
+    polkit.enable = true;
 
-  # TPM2 support for disk unlocking and hardware-backed credentials.
-  security.tpm2 = {
-    enable = true;
-    pkcs11.enable = true;
-    tctiEnvironment.enable = true;
+    tpm2 = {
+      enable = true;
+      pkcs11.enable = true;
+      tctiEnvironment.enable = true;
+    };
+
+    apparmor = {
+      enable = true;
+      packages = [ pkgs.apparmor-profiles ];
+      killUnconfinedConfinables = true;
+    };
+
+    protectKernelImage = true;
+    lockKernelModules = true;
+
+    pam.services.ly.enableGnomeKeyring = true;
   };
 
-  # Realtime audio scheduling and mandatory access control.
-  security.rtkit.enable = true;
-  security.apparmor.enable = true;
-  security.apparmor = {
-    packages = [ pkgs.apparmor-profiles ];
-    killUnconfinedConfinables = true;
-  };
-
-  # Unlock the GNOME keyring through the Ly login session.
-  security.pam.services.ly.enableGnomeKeyring = true;
   services.gnome.gnome-keyring.enable = true;
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -36,8 +37,4 @@
       TimeoutStopSec = 10;
     };
   };
-  
-  security.protectKernelImage = true;
-  security.lockKernelModules = true;
-
 }

@@ -24,14 +24,15 @@ A stable, secure NixOS development environment for developers and CS students. B
 
 | Module | Description |
 |---|---|
+| `audio.nix` | PipeWire (ALSA, PulseAudio, JACK), rtkit real-time scheduling |
 | `boot.nix` | systemd-boot, kernel lockdown, LSM stack (Landlock, Yama, AppArmor, BPF), LTS kernel + latest specialisation |
-| `desktop.nix` | Sway, Waybar, Foot, Rofi, Dunst, XDG portals, PipeWire, Blueman, Ly |
-| `hardware.nix` | Intel graphics & media, SOF firmware, Bluetooth, printing, Flatpak, zram, earlyoom |
-| `laptop.nix` | TLP (75–80 % battery thresholds), CPU governor profiles, fingerprint login, thermald |
+| `compat.nix` | nix-ld, AppImage (binfmt), envfs, Flatpak, direnv, Starship |
+| `desktop.nix` | Sway, XDG portals, Ly, GVfs, Tumbler, earlyoom, logind, fonts |
+| `hardware.nix` | Intel graphics & media, SOF firmware, Bluetooth, printing, zram |
+| `laptop.nix` | TLP (75–80 % battery thresholds), CPU governor profiles, fingerprint login, thermald, upower |
 | `networking.nix` | NetworkManager, MAC randomisation, nftables, OpenVPN / OpenConnect, LocalSend |
 | `security.nix` | Polkit, TPM2, AppArmor (with profiles), GNOME Keyring, kernel image & module locking |
 | `virtualisation.nix` | Docker, Podman, libvirtd / QEMU-KVM, Waydroid, virt-manager, Kubernetes stack |
-| `compat.nix` | AppImage (binfmt), envfs, nix-ld with broad library set for unpatched binaries |
 | `guest.nix` | Optional KDE Plasma 6 guest session — tmpfs home wiped on logout *(not loaded by default)* |
 
 ## Features
@@ -135,12 +136,13 @@ forge/
 ├── configuration.nix           # Top-level system configuration
 ├── hardware-configuration.nix  # Machine-specific hardware settings
 └── modules/
-    ├── boot.nix                # Boot, kernel, and Secure Boot
-    ├── compat.nix              # AppImage, envfs, nix-ld
-    ├── desktop.nix             # Sway, PipeWire, display manager
+    ├── audio.nix               # PipeWire, rtkit
+    ├── boot.nix                # Boot, kernel, Secure Boot
+    ├── compat.nix              # nix-ld, AppImage, envfs, Flatpak, direnv, Starship
+    ├── desktop.nix             # Sway, Ly, portals, fonts
     ├── guest.nix               # Optional KDE Plasma guest session
-    ├── hardware.nix            # Drivers, printing, Bluetooth, zram
-    ├── laptop.nix              # TLP, fingerprint, thermald
+    ├── hardware.nix            # Drivers, Bluetooth, printing, zram
+    ├── laptop.nix              # TLP, fingerprint, thermald, upower
     ├── networking.nix          # NetworkManager, firewall, VPN
     ├── packages.nix            # System-wide packages
     ├── security.nix            # AppArmor, TPM2, polkit, keyring

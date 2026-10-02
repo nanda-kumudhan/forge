@@ -1,50 +1,52 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  # Container runtimes and hardware virtualization.
-  virtualisation.containers.enable = true;
-  virtualisation.podman.enable = true;
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.package = pkgs.qemu_kvm;
+  virtualisation = {
+    containers.enable = true;
+    podman.enable = true;
+    docker.enable = true;
+
+    libvirtd = {
+      enable = true;
+      qemu.package = pkgs.qemu_kvm;
+    };
+
+    spiceUSBRedirection.enable = true;
+
+    waydroid = {
+      enable = true;
+      package = pkgs.waydroid-nftables;
+    };
   };
-  virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.waydroid = {
-    enable = true;
-    package = pkgs.waydroid-nftables;
-  };
+
   programs.virt-manager.enable = true;
 
   systemd.services.waydroid-mount.wantedBy = [ "multi-user.target" ];
 
-  # Netfilter modules, moved from boot.nix (Waydroid networking).
   boot.kernelModules = [
-    "nf_tables"
     "nf_conntrack"
     "nf_nat"
-    "nft_ct"
+    "nf_tables"
     "nft_chain_nat"
+    "nft_ct"
     "nft_masq"
   ];
 
   environment.systemPackages = with pkgs; [
-    # Virtualization and containers.
+    distrobox
+    docker-compose
+    dnsmasq
+    nftables
+    podman-desktop
     qemu
     spice-gtk
-    distrobox
-    podman-desktop
-    docker-compose
-    nftables
-    dnsmasq
 
-    # Kubernetes development stack.
-    kubectl
-    kind
-    minikube
-    kubernetes-helm
-    kustomize
     k9s
+    kind
+    kustomize
+    kubectl
     kubectx
+    kubernetes-helm
+    minikube
   ];
 }

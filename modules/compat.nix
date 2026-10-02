@@ -1,44 +1,58 @@
 { pkgs, ... }:
 
 {
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
-  environment.systemPackages = with pkgs; [ fuse2 ];
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      alsa-lib
+      atk
+      bzip2
+      cairo
+      curl
+      dbus
+      expat
+      fontconfig
+      freetype
+      glib
+      gtk3
+      libdrm
+      libGL
+      libxcb
+      libxcomposite
+      libxdamage
+      libxfixes
+      libxkbcommon
+      libxrandr
+      libxrender
+      libxtst
+      libx11
+      libxext
+      mesa
+      nspr
+      nss
+      openssl
+      pango
+      pipewire
+      stdenv.cc.cc
+      wayland
+      zlib
+    ];
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  programs.starship.enable = true;
 
   services.envfs.enable = true;
+  services.flatpak.enable = true;
 
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    zlib
-    bzip2
-    openssl
-    curl
-    glib
-    freetype
-    dbus
-    expat
-    fontconfig
-    libGL
-    libdrm
-    mesa
-    nspr
-    nss
-    pango
-    cairo
-    atk
-    gtk3
-    alsa-lib
-    pipewire
-    wayland
-    libxkbcommon
-    libx11
-    libxext
-    libxcb
-    libxcomposite
-    libxdamage
-    libxfixes
-    libxrandr
-    libxrender
-    libxtst
-  ];
+  environment.systemPackages = with pkgs; [ fuse2 ];
 }

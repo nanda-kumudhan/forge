@@ -1,14 +1,11 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
+    ./modules/audio.nix
     ./modules/boot.nix
+    ./modules/compat.nix
     ./modules/desktop.nix
     ./modules/hardware.nix
     ./modules/laptop.nix
@@ -16,37 +13,16 @@
     ./modules/packages.nix
     ./modules/security.nix
     ./modules/virtualisation.nix
-    ./modules/compat.nix
   ];
 
-  # Keep this aligned with the NixOS release used to create the system.
   system.stateVersion = "26.05";
   networking.hostName = "forge";
 
-  # Locale and keyboard configuration.
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
   console.keyMap = "uk";
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
-  };
+  services.xserver.xkb.layout = "gb";
 
-  # Several desktop applications and drivers are unfree.
-  services.dbus.enable = true;
-
-  # Primary local account.
   users.users.builder = {
     isNormalUser = true;
     extraGroups = [
@@ -60,21 +36,4 @@
       "docker"
     ];
   };
-
-  # Development and shell conveniences.
-  programs.nix-ld.enable = true;
-  programs.starship.enable = true;
-  nix.settings.auto-optimise-store = true;
-  nix.optimise.automatic = true;
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  # Fonts shared by the desktop and applications.
-  fonts.enableDefaultPackages = true;
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
 }

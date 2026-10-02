@@ -1,11 +1,10 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
-
   security.pam.services.ly.fprintAuth = true;
 
-  # TLP battery management for the T490s.
   services.power-profiles-daemon.enable = false;
+
   services.tlp = {
     enable = true;
     pd.enable = true;
@@ -18,7 +17,8 @@
       STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
+
   services.fprintd.enable = true;
   services.thermald.enable = true;
-
+  services.upower.enable = true;
 }

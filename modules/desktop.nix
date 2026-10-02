@@ -1,24 +1,25 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  # Sway and the utilities used by the Wayland desktop session.
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
     extraPackages = with pkgs; [
       autotiling
+      brightnessctl
+      bluetui
+      dunst
       foot
       grim
       htop
       imv
-      dunst
-      mpv
       kanshi
+      mpv
       nwg-look
-      brightnessctl
-      bluetui
       pavucontrol
+      playerctl
       polkit_gnome
+      rofi
       slurp
       swaybg
       swayidle
@@ -27,27 +28,26 @@
       waybar
       wdisplays
       wf-recorder
-      zathura
-      playerctl
-      rofi
       xarchiver
+      zathura
     ];
   };
 
-  # XDG portals provide screenshots, screencasts, and desktop integration.
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    wlr.settings.screencast = {
-      chooser_type = "dmenu";
-      chooser_cmd = "${pkgs.rofi}/bin/rofi -dmenu -p 'Select Output:'";
+    wlr = {
+      enable = true;
+      settings.screencast = {
+        chooser_type = "dmenu";
+        chooser_cmd = "${pkgs.rofi}/bin/rofi -dmenu -p 'Select Output:'";
+      };
     };
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config = {
-      common.default = [ "wlr" "gtk" ];
+      common.default = [
+        "wlr"
+        "gtk"
+      ];
       sway = {
         "org.freedesktop.impl.portal.ScreenCast" = "wlr";
         "org.freedesktop.impl.portal.Screenshot" = "wlr";
@@ -55,16 +55,25 @@
     };
   };
 
-  # PipeWire provides ALSA, PulseAudio, and JACK compatibility.
-  services.pipewire = {
+  services.displayManager.ly.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
+  services.earlyoom = {
     enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
+    enableNotifications = true;
+    extraArgs = [
+      "--avoid"
+      "(^|/)(sway|systemd|Xwayland)$"
+    ];
   };
 
-  services.blueman.enable = true;
+  services.logind.settings.Login = {
+    HandlePowerKey = "suspend";
+    IdleAction = "suspend";
+    IdleActionSec = "15min";
+  };
 
-  # Ly provides the graphical login screen for the Sway session.
-  services.displayManager.ly.enable = true;
+  fonts.enableDefaultPackages = true;
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 }

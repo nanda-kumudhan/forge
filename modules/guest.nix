@@ -5,9 +5,6 @@
   ...
 }:
 
-# Optional guest account (KDE Plasma, SDDM, empty password, wiped on logout).
-# Add to imports in configuration.nix to enable; remove to disable.
-
 let
   guestUid = 1500;
 
@@ -31,7 +28,6 @@ in
     hashedPassword = "";
   };
 
-  # SDDM replaces Ly, and autologins the guest once at boot.
   services.displayManager.ly.enable = lib.mkForce false;
   services.displayManager.sddm = {
     enable = true;
@@ -60,7 +56,6 @@ in
     ];
   };
 
-  # Wipe the home once the guest's last session has ended.
   systemd.services."user@${toString guestUid}" = {
     overrideStrategy = "asDropin";
     serviceConfig.ExecStopPost = "+${wipeHome}";

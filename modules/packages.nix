@@ -1,12 +1,9 @@
 { config, pkgs, ... }:
 
 {
-
   nixpkgs.config.allowUnfree = true;
 
-  # Applications and command-line tools that are not configured as services.
   environment.systemPackages = with pkgs; [
-    # Core utilities and archives.
     p7zip
     unrar
     unzip
@@ -22,8 +19,6 @@
     man-pages
     cups-pk-helper
 
-    # Fonts and themes.
-    nerd-fonts.jetbrains-mono
     papirus-icon-theme
     noto-fonts
     noto-fonts-color-emoji
@@ -31,8 +26,8 @@
     liberation_ttf
     materia-theme
 
-    # File management and desktop utilities.
     udiskie
+    blueman
     gnome-disk-utility
     seahorse
     xdg-utils
@@ -42,7 +37,6 @@
     ntfs3g
     ntfsprogs-plus
 
-    # Browsers, messaging, file sharing, and VPN tools.
     firefox
     brave
     discord
@@ -57,7 +51,6 @@
     remmina
     spotify
 
-    # Maintenance, firmware, and Secure Boot tools.
     fwupd
     keepassxc
     gcr
@@ -69,7 +62,6 @@
     torsocks
     system-config-printer
 
-    # Programming languages, build tools, and embedded tooling.
     nixd
     nixfmt
     bash-language-server
@@ -83,7 +75,6 @@
     rpi-imager
     github-copilot-cli
 
-    # Editors, media, office, and document tools.
     nano
     helix
     vim
