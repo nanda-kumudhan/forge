@@ -15,7 +15,6 @@
     fastfetch
     jq
     dmidecode
-    fuse2
     android-tools
     wl-clipboard
     qrencode

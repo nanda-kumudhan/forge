@@ -1,23 +1,23 @@
 { pkgs, ... }:
 
 {
-  # envfs mounts /usr/bin, /bin, /sbin via FUSE so scripts with hardcoded
-  # paths (e.g. #!/usr/bin/python, #!/usr/bin/env bash) work out of the box.
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+  environment.systemPackages = with pkgs; [ fuse2 ];
+
   services.envfs.enable = true;
 
-  # Libraries exposed to unpatched ELF binaries through nix-ld.
-  # nix-ld itself is enabled in configuration.nix.
   programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc # libstdc++, libgcc_s
+    stdenv.cc.cc
     zlib
     bzip2
     openssl
     curl
     glib
+    freetype
     dbus
     expat
     fontconfig
-    freetype
     libGL
     libdrm
     mesa
