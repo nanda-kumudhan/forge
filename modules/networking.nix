@@ -2,6 +2,7 @@
 
 {
   networking = {
+    hostName = "forge";
     firewall = {
       enable = true;
       allowedTCPPorts = [ 53317 ];
