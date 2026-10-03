@@ -87,4 +87,5 @@
     texlive.combined.scheme-full
     networkmanagerapplet
   ];
+
 }

@@ -39,20 +39,14 @@
     ];
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
   programs.appimage = {
     enable = true;
     binfmt = true;
   };
 
-  programs.starship.enable = true;
-
   services.envfs.enable = true;
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [ fuse2 ];
+
 }
