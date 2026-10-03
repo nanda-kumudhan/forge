@@ -39,4 +39,16 @@
   };
 
   boot.kernel.sysctl."vm.page-cluster" = 0;
+
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+  };
+
+  services.logind.settings.Login = {
+    HandlePowerKey = "suspend";
+    IdleAction = "suspend";
+    IdleActionSec = "15min";
+  };
+
 }

@@ -59,21 +59,6 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
-  services.earlyoom = {
-    enable = true;
-    enableNotifications = true;
-    extraArgs = [
-      "--avoid"
-      "(^|/)(sway|systemd|Xwayland)$"
-    ];
-  };
-
-  services.logind.settings.Login = {
-    HandlePowerKey = "suspend";
-    IdleAction = "suspend";
-    IdleActionSec = "15min";
-  };
-
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 }
