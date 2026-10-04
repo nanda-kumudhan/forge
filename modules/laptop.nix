@@ -7,8 +7,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  boot.kernelModules = [ "thinkpad_acpi" ];
-
   services.tlp = {
     enable = true;
     pd.enable = true;
