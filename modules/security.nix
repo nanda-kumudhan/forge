@@ -16,6 +16,8 @@
       killUnconfinedConfinables = true;
     };
 
+    lsm = [ "lockdown" ];
+
     protectKernelImage = true;
     lockKernelModules = true;
 

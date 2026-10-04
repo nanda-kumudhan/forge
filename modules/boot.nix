@@ -11,7 +11,6 @@
 
     kernelParams = [
       "lockdown=integrity"
-      "lsm=landlock,yama,apparmor,bpf,lockdown"
     ];
 
     kernelModules = [
