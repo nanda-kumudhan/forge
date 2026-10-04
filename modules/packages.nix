@@ -1,11 +1,11 @@
 { pkgs, ... }:
 
 {
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     p7zip
-    unrar
     unzip
     wget
     tree
@@ -24,7 +24,6 @@
     noto-fonts-color-emoji
     dejavu_fonts
     liberation_ttf
-    materia-theme
 
     udiskie
     blueman
@@ -39,8 +38,6 @@
 
     firefox
     brave
-    discord
-    telegram-desktop
     localsend
     prismlauncher
     transmission_4-gtk
@@ -49,11 +46,10 @@
     proton-vpn-cli
     wireguard-tools
     remmina
-    spotify
 
     fwupd
     keepassxc
-    gcr
+    gcr_4
     powertop
     smartmontools
     efibootmgr
@@ -66,14 +62,11 @@
     nixfmt
     bash-language-server
     marksman
+    pandoc
     git
     gh
-    dbeaver-bin
-    android-studio
-    arduino-ide
-    arduino-cli
-    rpi-imager
     github-copilot-cli
+    dbeaver-bin
 
     nano
     helix
@@ -81,10 +74,10 @@
     neovim
     zed-editor
 
-    libreoffice-fresh
+    libreoffice
     anki
     texstudio
-    texlive.combined.scheme-full
+    texliveMedium
     networkmanagerapplet
   ];
 

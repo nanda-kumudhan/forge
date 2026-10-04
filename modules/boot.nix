@@ -24,10 +24,16 @@
       systemd.enable = true;
       availableKernelModules = [ "tpm_tis" ];
     };
+
   };
 
-  specialisation.latest-kernel.configuration = {
-    system.nixos.tags = [ "Latest" ];
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-  };
+  specialisation = {
+      latest.configuration = {
+
+        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+
+        system.nixos.tags = [ "latest-kernel" ];
+      };
+    };
+
 }
