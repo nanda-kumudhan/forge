@@ -13,6 +13,14 @@
       "lockdown=integrity"
     ];
 
+    kernelPatches = [ {
+      name = "enable-lockdown";
+      patch = null;
+      extraConfig = ''
+        SECURITY_LOCKDOWN_LSM y
+      '';
+    } ];
+
     kernelModules = [
       "msr"
       "uinput"
@@ -26,14 +34,5 @@
     };
 
   };
-
-  specialisation = {
-      latest.configuration = {
-
-        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-
-        system.nixos.tags = [ "latest-kernel" ];
-      };
-    };
 
 }
